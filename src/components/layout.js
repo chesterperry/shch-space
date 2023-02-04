@@ -26,18 +26,11 @@ const Layout = ({ children }) => {
     <>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
+      className="my-0 mx-auto max-w-4xl p-8"
       >
         <main>{children}</main>
         <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
+        className="mt-8 text-sm"
         >
           © {new Date().getFullYear()} &middot; Built with
           {` `}

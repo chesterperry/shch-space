@@ -15,6 +15,34 @@ module.exports = {
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    {
+      resolve: 'gatsby-source-google-spreadsheets',
+      options: {
+        spreadsheetId: '1jUe-z_gbKj5G6uyQ0Ib3C8zTZA9tLXoRssYop0TYO4M',
+        // apiKey: 'AIzaSyCmGBALyn4XbjiqYZlLfTPHYUoHfGIkhRc',
+        credentials: require(`./oleg-scherbinin-project-15aca17500ca.json`)
+      }
+    },
+    'gatsby-plugin-postcss',
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        path: `${__dirname}/src/posts`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-page-creator`,
+      options: {
+        path: `${__dirname}/src/posts`,
+      },
+    },
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -23,6 +51,7 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

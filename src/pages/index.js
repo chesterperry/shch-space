@@ -4,7 +4,6 @@ import { StaticImage } from "gatsby-plugin-image"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import * as styles from "../components/index.module.css"
 
 const links = [
   {
@@ -71,7 +70,7 @@ const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=de
 
 const IndexPage = () => (
   <Layout>
-    <div className={styles.textCenter}>
+    <div className="text-center">
       <StaticImage
         src="../images/example.png"
         loading="eager"
@@ -79,12 +78,12 @@ const IndexPage = () => (
         quality={95}
         formats={["auto", "webp", "avif"]}
         alt=""
-        style={{ marginBottom: `var(--space-3)` }}
+        class="mb-3"
       />
       <h1>
         Welcome to <b>Gatsby!</b>
       </h1>
-      <p className={styles.intro}>
+      <p className="tracking-normal m-auto leading-7">
         <b>Example pages:</b>{" "}
         {samplePageLinks.map((link, i) => (
           <React.Fragment key={link.url}>
@@ -96,16 +95,16 @@ const IndexPage = () => (
         Edit <code>src/pages/index.js</code> to update this page.
       </p>
     </div>
-    <ul className={styles.list}>
+    <ul className="mx-0 grid gap-16 sm:grid-cols-2 my-16 list-disc">
       {links.map(link => (
-        <li key={link.url} className={styles.listItem}>
+        <li key={link.url} className="[&:nth-child(1)]:marker:text-red-400 [&:nth-child(2)]:marker:text-green-400 [&:nth-child(3)]:marker:text-sky-400 [&:nth-child(4)]:marker:text-orange-400">
           <a
-            className={styles.listItemLink}
+            className="font-bold"
             href={`${link.url}${utmParameters}`}
           >
             {link.text} ↗
           </a>
-          <p className={styles.listItemDescription}>{link.description}</p>
+          <p className="mt-1">{link.description}</p>
         </li>
       ))}
     </ul>
