@@ -3,11 +3,9 @@
   "private": true,
   "description": "",
   "version": "0.1.0",
-  "author": "oleg.shch@gmail.com",
+  "author": "Oleg Scherbinin <oleg.shch@gmail.com>",
   "dependencies": {
     "@mdx-js/react": "^2.2.1",
-    "@react-three/drei": "^9.56.5",
-    "@react-three/fiber": "^8.10.1",
     "gatsby": "^5.5.0",
     "gatsby-plugin-image": "^3.5.0",
     "gatsby-plugin-manifest": "^5.5.0",
@@ -17,9 +15,7 @@
     "gatsby-source-google-spreadsheets": "^3.0.8",
     "gatsby-transformer-sharp": "^5.5.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "three": "^0.149.0",
-    "uuid": "^9.0.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

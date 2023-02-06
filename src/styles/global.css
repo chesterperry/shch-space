@@ -11,13 +11,13 @@
       @apply text-xl;
     }
     a {
-       @apply bg-transparent text-purple-700 font-medium underline underline-offset-2 decoration-2  hover:no-underline hover:outline-0
+       @apply bg-transparent text-slate-700 font-medium underline underline-offset-2 decoration-2  hover:no-underline hover:outline-0
     }
     code {
         @apply bg-orange-100 text-orange-900 border-inherit rounded break-normal p-0.5 font-mono text-sm
       }
     h1 > b {
-        @apply text-purple-700 font-bold
+        @apply text-slate-900 font-bold
     }
     html {
         @apply text-base overflow-y-scroll font-sans
@@ -71,17 +71,17 @@
   }
 
   @layer utilities {
-    .draw-grid-4 {
+    .draw-grid-40 {
         background: #fff;
         background-image: linear-gradient(rgba(255, 0, 0, .1) .1em, transparent .1em), linear-gradient(90deg, rgba(255, 0, 0, .1) .1em, transparent .1em);
         background-size: 4em 4em;
     }
-    .draw-grid-2 {
+    .draw-grid-20 {
         background: #fff;
         background-image: linear-gradient(rgba(255, 0, 0, .1) .1em, transparent .1em), linear-gradient(90deg, rgba(255, 0, 0, .1) .1em, transparent .1em);
         background-size: 2em 2em;
     }
-    .draw-grid-1 {
+    .draw-grid-10 {
         background: #fff;
         background-image: linear-gradient(rgba(255, 0, 0, .1) .1em, transparent .1em), linear-gradient(90deg, rgba(255, 0, 0, .1) .1em, transparent .1em);
         background-size: 1em 1em;
