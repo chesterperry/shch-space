@@ -10,8 +10,8 @@ export default function Grid({ data }) {
   console.log(project, query)
   return (
     <LayoutGrid>
-      <div className="h-screen w-screen grid md:grid-cols-2 grid-cols-1 grid-flow-col-dense draw-grid-40">
-        <div className="p-2.5 h-screen w-full grid grid-cols-2 grid-rows-5 grid-flow-row-dense ">
+      <div className="h-screen w-screen flex flex-row grid-flow-col-dense draw-grid-40">
+        <div className="p-2.5 h-screen w-full grid grid-cols-2 grid-rows-5 grid-flow-row-dense md:basis-1/2">
           <div className="col-span-2   flex flex-col">
             <h3 className="basis-2/3">
               <Link
@@ -47,7 +47,7 @@ export default function Grid({ data }) {
             <span className="basis-2/3">{project?.comment}</span>
           </div>
         </div>
-        <div className="p-2.5 h-screen w-full  grid-cols-2 grid-rows-5 grid-flow-row-dense md:grid hidden">
+        <div className="p-2.5 h-screen w-full  grid-cols-2 grid-rows-5 grid-flow-row-dense md:basis-1/2 hidden">
           <div className="col-span-2   flex flex-col ">
             <h3 className="basis-2/3">SWCTION</h3>
 
