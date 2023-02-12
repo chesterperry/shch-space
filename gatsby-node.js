@@ -68,6 +68,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         project
         image1
         object
+        comment
+        designer
+        participants
       }
     }
   }

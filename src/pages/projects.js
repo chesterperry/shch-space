@@ -7,8 +7,6 @@ import { graphql, useStaticQuery } from "gatsby"
 import { ImagePreview } from "../components/imagePreview"
 import { useState } from "react"
 
-
-
 const ProjectsList = () => {
   const [imageName, setImage] = useState(null)
   const { googleSheet } = useStaticQuery(graphql`
@@ -20,6 +18,7 @@ const ProjectsList = () => {
           roleCode
           project
           image1
+          slug
           object
         }
       }
@@ -28,36 +27,41 @@ const ProjectsList = () => {
 
   return (
     <LayoutGrid>
-      <div className=" h-screen w-screen draw-grid-20 grid md:grid-cols-2 grid-cols-1 grid-flow-col-dense ">
-        <div className="p-2.5 h-screen w-full grid grid-cols-2 grid-rows-5 grid-flow-row-dense ">
-          <div className="col-span-2 flex flex-col">
-            <h3 className="basis-2/3">РАЗДЕЛ</h3>
-
-            <h1 className="basis-1/3">ПРОЕКТЫ</h1>
+      <div className=" min-h-screen w-screen draw-grid-20 flex flex-row">
+        <div className="p-2.5 min-h-screen  md:basis-1/2 grid ">
+          <div className='flex h-40 flex-col'>
+            <h3 className="h-15">
+              <Link className=" no-underline hover:underline" to="/">
+                INDEX ←
+              </Link>
+            </h3>
+            <h1 className="h-30">ПРОЕКТЫ</h1>
           </div>
-
-          <div className="col-span-2 ">
+          <div className="col-span-2 mb-12">
             Короткое описание почему эти проекты здесь, возможно в будущем часть
             из них будет не актуальна для презентации вместе с обновлениями,
             работа в процессе
           </div>
-          <div className="col-span-2 row-span-2 overflow-y-scroll">
+          <div className="col-span-2 sm:row-span-2 row-span-3">
             {googleSheet.projects.map(data => (
-              <div key={data.id}
-                onMouseOver={() => setImage(data.image1)}
-                className="flex h-8 hover:underline hover:decoration-3 mr-3 underline-offset-2"
-              >
-                <span className="basis-2/6 truncate">{data.project}</span>
-                <span className="basis-1/6">{data.year}</span>
-                <span className="basis-2/6 truncate">{data.object}</span>
-                <span className="basis-1/6 flex place-content-center">
-                  {data.roleCode}{" "}
-                </span>
-              </div>
+              <Link className="no-underline " to={`/projects/${data.slug}`}>
+                <div
+                  key={data.id}
+                  onMouseOver={() => setImage(data.image1)}
+                  className="flex text-lg h-8 hover:underline  hover:decoration-3 mr-3 underline-offset-2"
+                >
+                  <span className="basis-2/6 truncate">{data.project}</span>
+                  <span className="basis-1/6">{data.year}</span>
+                  <span className="basis-2/6 truncate">{data.object}</span>
+                  <span className="basis-1/6 flex place-content-center">
+                    {data.roleCode}{" "}
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
-        <div className="p-2.5 h-screen w-full  grid-cols-2 grid-rows-5 grid-flow-row-dense md:grid hidden">
+        <div className="p-2.5 max-h-screen md:grid grid-cols-2 grid-rows-5 grid-flow-row-dense md:basis-1/2 hidden">
           <div className="col-span-2   flex flex-col "></div>
           <div className="col-span-2 row-span-3 grid ">
             <ImagePreview imageName={imageName} />
@@ -69,6 +73,7 @@ const ProjectsList = () => {
   )
 }
 
-export const Head = () => <Seo title="Test:grid" />
-
+export const Head = () => {
+  return <Seo title={`ПРОЕКТЫ | Oleg Scherbinin`} />
+}
 export default ProjectsList
