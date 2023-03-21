@@ -16,7 +16,7 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: 'gatsby-source-google-spreadsheets',
+      resolve: 'gatsby-source-google-sheets',
       options: {
         spreadsheetId: '1jUe-z_gbKj5G6uyQ0Ib3C8zTZA9tLXoRssYop0TYO4M',
         // apiKey: 'AIzaSyCmGBALyn4XbjiqYZlLfTPHYUoHfGIkhRc',
