@@ -48,7 +48,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     createPage({
       // As mentioned above you could also query something else like frontmatter.title above and use a helper function
       // like slugify to create a slug
-      path: node.frontmatter.slug,
+      path: `/notes/${node.frontmatter.slug}`,
       // Provide the path to the MDX content file so webpack can pick it up and transform it into JSX
       component: `${postTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
       // You can use the values in this context in
@@ -58,38 +58,43 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 
   const queryGS = await graphql(`
-  query pageQuery {
-    googleSheet {
-      projects {
-        id
-        slug
-        year
-        roleCode
-        project
-        image1
-        object
-        comment
-        designer
-        participants
+  query GPNodes {
+    allGoogleProjectsSheet(filter: {status: {eq: "publish"}}, sort: {year: DESC}) {
+      edges {
+        next {
+          slug
+          project
+        }
+        previous {
+          slug
+          project
+        }
+        node {
+          id
+          slug
+        }
       }
     }
   }
   `)
 
-
-  const projectPages = queryGS.data.googleSheet.projects;
- 
-  projectPages.forEach(node => {
+  const projectPages = queryGS.data.allGoogleProjectsSheet.edges
+  projectPages.forEach(edge => {
     createPage({
       // As mentioned above you could also query something else like frontmatter.title above and use a helper function
       // like slugify to create a slug
-      path: "/projects/" + node.slug,
+      path: "/projects/" + edge.node.slug,
       // Provide the path to the MDX content file so webpack can pick it up and transform it into JSX
       component: require.resolve("./src/templates/projectPage.js"),
       // You can use the values in this context in
       // our page layout component
-      context: { id: node.id },
+      context: {
+        id: edge.node.id,
+        previousSlug: edge?.previous?.slug || null,
+        previousProject: edge?.previous?.project || null,
+        nextSlug: edge?.next?.slug || null,
+        nextProject: edge?.next?.project || null,
+      },
     })
   })
-
 }

@@ -9,17 +9,16 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Oleg Scherbinin Space`,
+    title: `Oleg Scherbinin | shch one `,
     description: ``,
     author: `@olegscherbinin`,
-    siteUrl: `https://olegscherbinin.com/`,
+    siteUrl: `https://shch.one/`,
   },
   plugins: [
     {
       resolve: 'gatsby-source-google-sheets',
       options: {
         spreadsheetId: '1jUe-z_gbKj5G6uyQ0Ib3C8zTZA9tLXoRssYop0TYO4M',
-        // apiKey: 'AIzaSyCmGBALyn4XbjiqYZlLfTPHYUoHfGIkhRc',
         credentials: require(`./oleg-scherbinin-project-15aca17500ca.json`)
       }
     },
@@ -57,15 +56,15 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `oleg-scherbinin-space`,
+        short_name: `shch-space`,
         start_url: `/`,
-        background_color: `#663399`,
+        background_color: `#fff`,
         // This will impact how browsers show your PWA/website
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/LetterO.png`, // This path is relative to the root of the site.
       },
     },
   ],
