@@ -21,10 +21,14 @@ const LayoutGrid = ({ children }) => {
     }
   `)
 
+  const currentYear = new Date(Date.now()).getFullYear()
+
   return (
-    <>
-        <main>{children}</main>
-    </>
+<div className="flex flex-col h-full w-full min-h-screen"> 
+          <div className="flex-none"> <Header  siteTitle={data.site.siteMetadata?.title + '© '+ currentYear || `Title`} /></div> 
+
+        <main className="flex flex-1">{children}</main>
+    </div>
   )
 }
 

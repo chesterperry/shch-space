@@ -4,8 +4,8 @@ const settings = {
   colorText: "#333",
   colorPrimary: "#7026b9",
   colorCodeBg: "#fff4db",
-  colorCode: "#8a6534"
-} 
+  colorCode: "#8a6534",
+}
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -17,12 +17,9 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-    'mono': ['"IBM Plex Mono"', "ui-monospace", "SFMono-Regular"]
+      mono: ['"IBM Plex Mono"', "ui-monospace", "SFMono-Regular"],
+    },
+    extend: { content: { "ne-arrow": 'url("../images/NE-arrow.svg")' } },
   },
-    extend: {},
-  },
-  plugins: [
-  ],
+  plugins: [],
 }
-
-
