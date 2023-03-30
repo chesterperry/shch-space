@@ -16,7 +16,7 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: 'gatsby-source-google-sheets',
+      resolve: 'gatsby-source-google-spreadsheets',
       options: {
         spreadsheetId: '1jUe-z_gbKj5G6uyQ0Ib3C8zTZA9tLXoRssYop0TYO4M',
         credentials: require(`./oleg-scherbinin-project-15aca17500ca.json`)
