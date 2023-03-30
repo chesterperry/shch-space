@@ -8,3 +8,8 @@ New drafts:
 
 Remove all not used css files.
 Rewrite new global styles with Tailwind 
+
+## Part 2 
+
+Prepare blog section
+Replace index with projects
