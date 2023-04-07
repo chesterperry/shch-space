@@ -37,9 +37,7 @@ const ProjectsList = () => {
             <h1 className="h-32">ЗАПИСИ</h1>
           </div>
           <div className="col-span-2 mb-12">
-            Короткое описание почему эти проекты здесь, возможно в будущем часть
-            из них будет не актуальна для презентации вместе с обновлениями,
-            работа в процессе
+            Несколько записей на разные и близкие мне темы.
           </div>
           <div className="col-span-2 md:row-span-3 row-span-3">
             {allMdx.nodes.map(data => (

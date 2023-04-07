@@ -91,7 +91,7 @@ const ProjectsList = () => {
         </div>
         <div className="p-2.5  md:p-10  md:grid grid-cols-2 grid-rows-5 grid-flow-row-dense md:basis-1/2 hidden max-w-4xl">
           <div className="col-span-2   flex flex-col "></div>
-          <div className="col-span-2 row-span-3 grid ">
+          <div className="col-span-2 row-span-3 grid max-h-[500px]">
             {projectDetails.image &&
               (projectDetails.image.includes(".") ? (
                 <img
