@@ -6,13 +6,10 @@ import { Link } from "gatsby"
 import { graphql, useStaticQuery } from "gatsby"
 import { ImagePreview } from "../components/imagePreview"
 import { useState } from "react"
+import { useEffect } from "react"
 
 const ProjectsList = () => {
-  const [projectDetails, setProjectDetails] = useState({
-    image: null,
-    credentials: null,
-    project: null,
-  })
+
   const { googleSheet } = useStaticQuery(graphql`
     query pageQuery {
       googleSheet {
@@ -31,6 +28,27 @@ const ProjectsList = () => {
     }
   `)
 
+  const dataFiltered = googleSheet.projects.filter(el => el.status === "publish" )
+
+  const [projectDetails, setProjectDetails] = useState({
+    image: null,
+    credentials: null,
+    project: null,
+  })
+
+  useEffect (()=> {
+    if (dataFiltered.length > 0) {
+      let randomProject = Math.floor(Math.random()*dataFiltered.length)
+      setProjectDetails({
+        image: dataFiltered[randomProject].imageSource,
+        project: dataFiltered[randomProject].project,
+        credentials: dataFiltered[randomProject].imageCredentials,
+    })
+    console.log(randomProject)
+  }  
+  },[])
+
+
   return (
     <LayoutGrid>
       <div className="w-screen draw-grid-20 flex flex-row justify-center">
@@ -48,10 +66,10 @@ const ProjectsList = () => {
             год, моя роль и тип проекта. Названия кликабельны. Внутри дополнительные фотографии и комментарий.
           </div>
           <div className="md:col-span-2 md:row-span-2 row-span-3">
-            {googleSheet.projects.map(
-              data =>
+            {dataFiltered.map(
+              (data, index) =>
                 data.status === "publish" && (
-                  <Link className="no-underline " to={`/projects/${data.slug}`}>
+                  <Link className="no-underline " to={`/projects/${data.slug}`} key={index}>
                     <div
                       key={data.id}
                       onFocus={() =>
@@ -91,7 +109,7 @@ const ProjectsList = () => {
         </div>
         <div className="p-2.5  md:p-10  md:grid grid-cols-2 grid-rows-5 grid-flow-row-dense md:basis-1/2 hidden max-w-4xl">
           <div className="col-span-2   flex flex-col "></div>
-          <div className="col-span-2 row-span-3 grid max-h-[500px]">
+          <div className="col-span-2 row-span-3 grid">
             {projectDetails.image &&
               (projectDetails.image.includes(".") ? (
                 <img

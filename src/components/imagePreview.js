@@ -1,7 +1,6 @@
 import * as React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { useEffect } from "react"
 
 export const ImagePreview = ({ imageSource, className, loadedStatus}) => {
   const data = useStaticQuery(graphql`

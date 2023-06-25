@@ -1,10 +1,6 @@
 import React from "react"
-import { graphql } from "gatsby"
-import { MDXProvider } from "@mdx-js/react"
 import { Link } from "gatsby"
 import LayoutGrid from "../components/layoutGrid"
-
-const shortcodes = { Link } // Provide common components here
 
 export default function PageTemplate({ data, children }) {
   return (

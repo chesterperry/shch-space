@@ -1,5 +1,5 @@
 import { graphql, useStaticQuery } from "gatsby"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { ImagePreview } from "./imagePreview"
 
 const SlideShow = ({ images: contentPath }) => {
@@ -24,8 +24,8 @@ const SlideShow = ({ images: contentPath }) => {
     ? [propImages]
     : data.allImages.nodes.filter(el => el.relativeDirectory === propImages)
   const [imageName, setImageName] = useState({ ...images[0] })
-  if (images.length <= 1) <ImagePreview imageSource={imageName.relativePath} />
-  const [count, setCount] = useState(1)
+  // if (images.length <= 1) return <ImagePreview imageSource={imageName.relativePath} />
+  const [count, setCount] = useState(0)
   const [isPlaying, togglePlay] = useState(true)
   const [cached, setCached] = useState(false)
   console.log(cached, count, imageName)

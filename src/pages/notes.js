@@ -4,7 +4,6 @@ import LayoutGrid from "../components/layoutGrid"
 import Seo from "../components/seo"
 import { Link } from "gatsby"
 import { graphql, useStaticQuery } from "gatsby"
-import { ImagePreview } from "../components/imagePreview"
 import { useState } from "react"
 
 const ProjectsList = () => {

@@ -3,7 +3,6 @@ import * as React from "react"
 import LayoutGrid from "../components/layoutGrid"
 import Seo from "../components/seo"
 import { graphql, Link } from "gatsby"
-import { ImagePreview } from "../components/imagePreview"
 import SlideShow from "../components/slideshow"
 import LinkBeautifier from "../components/linkBeautifier"
 
