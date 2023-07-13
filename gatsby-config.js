@@ -4,6 +4,10 @@
  * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
  */
 
+require("dotenv").config({
+  path: `.env`,
+})
+
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
@@ -19,7 +23,18 @@ module.exports = {
       resolve: 'gatsby-source-google-spreadsheets',
       options: {
         spreadsheetId: '1jUe-z_gbKj5G6uyQ0Ib3C8zTZA9tLXoRssYop0TYO4M',
-        credentials: require(`./oleg-scherbinin-project-15aca17500ca.json`)
+        credentials: {
+          type: "service_account",
+          project_id: "oleg-scherbinin-project",
+          private_key_id: process.env.PRIVATE_KEY_ID,
+          private_key: process.env.PRIVATE_KEY.replace(/(\\r)|(\\n)/g, '\n'),
+          client_email: "os-98-605@oleg-scherbinin-project.iam.gserviceaccount.com",
+          client_id: "108547937349450224895",
+          auth_uri: "https://accounts.google.com/o/oauth2/auth",
+          token_uri: "https://oauth2.googleapis.com/token",
+          auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+          client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/os-98-605%40oleg-scherbinin-project.iam.gserviceaccount.com"
+        },
       }
     },
     'gatsby-plugin-postcss',

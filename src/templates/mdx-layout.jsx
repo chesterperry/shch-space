@@ -10,9 +10,9 @@ export default function PageTemplate({ data, children }) {
   return (
     <LayoutGrid>
       <div className="draw-grid-40 min-h-fit w-screen flex justify-center">
-        <div className="p-2.5 md:p-10 w-full md:max-w-2xl">
-          <div className="grid w-full  md:grid-cols-2 grid-cols-1 flex-none">
-            <div className="h-60 md:col-span-2 col-span-1 ">
+        <div className="p-2.5 md:p-10 w-full md:max-w-4xl">
+          <div className="grid w-full  md:grid-cols-1 grid-cols-1 flex-none">
+            <div className="h-60 md:col-span-1 col-span-1 ">
               <h3 className="h-16">
                 <Link className=" no-underline hover:underline" to="/notes/">
                   ЗАПИСИ ←

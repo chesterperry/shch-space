@@ -45,7 +45,7 @@ const SlideShow = ({ images: contentPath }) => {
 
   return (
     images.map((el,index) =>    <div
-      className={`col-span-2 row-span-3 grid max-height-[500px] ${index === count ? '' : 'hidden'} `}
+      className={`col-span-2 row-span-3 grid md:max-h-full max-h-[240px] ${index === count ? '' : 'hidden'} `}
       onClick={() => togglePlay(!isPlaying)}
     >
       <p className='z-10 content-center row-start-1 row-end-2 col-start-1 col-end-2 justify-self-center self-center'> Загрузка... </p>

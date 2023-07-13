@@ -5,6 +5,8 @@ import Seo from "../components/seo"
 import { graphql, Link } from "gatsby"
 import SlideShow from "../components/slideshow"
 import LinkBeautifier from "../components/linkBeautifier"
+import IconOutward from "../components/icon.outward"
+import HorizontalLine from "../components/element.hline"
 
 export default function Grid({ data, pageContext }) {
   const project = data.allGoogleProjectsSheet.nodes[0]
@@ -16,8 +18,8 @@ export default function Grid({ data, pageContext }) {
           <div className="grid w-full  grid-cols-2 gap-2 flex-none">
             <div className="h-60 col-span-2">
               <h3 className="h-16">
-                <Link className=" no-underline hover:underline" to="/projects/">
-                  ПРОЕКТЫ ←
+                <Link className=" no-underline hover:underline" to="/#projects">
+                  INDEX ←
                 </Link>
               </h3>
 
@@ -26,12 +28,15 @@ export default function Grid({ data, pageContext }) {
 
             <div className="h-24  md:row-span-1 ">
               <h4 className="h-5">ПЕРИОД</h4>
+              <HorizontalLine/>
               <span className="mb-12 uppercase md:text-3xl text-xl font-light">
                 {project?.year}
               </span>
             </div>
             <div className="h-24  md:row-span-1">
               <h4 className="h-5">РОЛЬ</h4>
+              <HorizontalLine/>
+
               <span className="mb-12 uppercase md:text-3xl text-xl  font-light">
                 {project?.role}
               </span>
@@ -39,6 +44,8 @@ export default function Grid({ data, pageContext }) {
             {project?.architector && (
               <div className="h-24  md:row-span-1">
                 <h4 className="h-5">АРХИТЕКТОР</h4>
+                <HorizontalLine/>
+
                 <span className="mb-12 uppercase md:text-3xl text-xl  font-light">
                   {project?.architector}
                 </span>
@@ -47,6 +54,8 @@ export default function Grid({ data, pageContext }) {
             {project?.designer && (
               <div className="h-24  md:row-span-1">
                 <h4 className="h-5">ДИЗАЙН / ИДЕЯ</h4>
+                <HorizontalLine/>
+
                 <span className="mb-12 uppercase md:text-3xl text-xl  font-light">
                   {project?.designer}
                 </span>
@@ -55,6 +64,8 @@ export default function Grid({ data, pageContext }) {
             {project?.participants && (
               <div className="  h-24  md:row-span-1">
                 <h4 className="h-5">УЧАСТНИКИ</h4>
+                <HorizontalLine/>
+
                 <span className="mb-12 uppercase md:text-3xl text-xl  font-light">
                   {project?.participants}
                 </span>
@@ -62,19 +73,23 @@ export default function Grid({ data, pageContext }) {
             )}
             {project?.link && (
               <div className="  h-24  md:row-span-1">
-                <h4 className="h-5">ССЫЛКА</h4>
+                <h4 className="h-5">ССЫЛКА<IconOutward></IconOutward></h4>
+                <HorizontalLine/>
+
                 <span className="mb-12 uppercase md:text-3xl text-xl  font-light">
                   <LinkBeautifier link={project?.link} />
                 </span>
               </div>
             )}
           </div>
-          <div className=" grid md:hidden mb-12">
+          <div className=" grid md:hidden mb-12   md:max-h-max max-h-[240px] ">
             <SlideShow images={project?.imageSource} />
           </div>
           {project?.comment && (
             <div className="overflow-visible md:col-span-1 ">
               <h4 className="basis-1/3">КОММЕНТАРИЙ</h4>
+              <HorizontalLine/>
+
               <p className="basis-2/3 ">{project?.comment}</p>
             </div>
           )}
@@ -122,11 +137,11 @@ export default function Grid({ data, pageContext }) {
               </Link>
             )}
           </div>
-          <div className="col-span-2 row-span-3 grid ">
+          <div className="col-span-2 row-span-3 grid">
             {project?.imageSource &&
               (project?.imageSource.includes(".") ? (
                 <img
-                  className=" self-center justify-center w-full"
+                  className=" self-center justify-center w-full "
                   src={`../../${project?.imageSource}`}
                 />
               ) : (

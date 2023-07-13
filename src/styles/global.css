@@ -68,38 +68,11 @@
     @apply mb-1;
   }
   p {
-    @apply max-w-2xl;
+    @apply max-w-4xl;
   }
 }
 
 @layer utilities {
-  /* .draw-grid-40 {
-    background: #fff;
-    background-image: linear-gradient(
-        rgba(255, 0, 0, 0.03) 0.1em,
-        transparent 0.1em
-      ),
-      linear-gradient(90deg, rgba(255, 0, 0, 0.01) 0.1em, transparent 0.1em);
-    background-size: 4em 4em;
-  }
-  .draw-grid-20 {
-    background: #fff;
-    background-image: linear-gradient(
-        rgba(255, 0, 0, 0.03) 0.1em,
-        transparent 0.1em
-      ),
-      linear-gradient(90deg, rgba(255, 0, 0, 0.01) 0.1em, transparent 0.1em);
-    background-size: 2em 2em;
-  }
-  .draw-grid-10 {
-    background: #fff;
-    background-image: linear-gradient(
-        rgba(255, 0, 0, 0.03) 0.1em,
-        transparent 0.1em
-      ),
-      linear-gradient(90deg, rgba(255, 0, 0, 0.01) 0.1em, transparent 0.1em);
-    background-size: 1em 1em;
-  } */
   .draw-stripes-10 {
     background: #fff;
     background-image: 
