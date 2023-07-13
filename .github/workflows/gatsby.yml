@@ -75,15 +75,15 @@ jobs:
             ${{ runner.os }}-gatsby-build-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-      - name: Build with Gatsby
-        env:
-          PREFIX_PATHS: 'true'
-        run: ${{ steps.detect-package-manager.outputs.manager }} run build
       - name: create env file
         run: |
          touch .env
          echo PRIVATE_KEY_ID=${{ secrets.PRIVATE_KEY_ID }} >> .env
          echo PRIVATE_KEY=${{ secrets.PRIVATE_KEY }} >> .env
+      - name: Build with Gatsby
+        env:
+          PREFIX_PATHS: 'true'
+        run: ${{ steps.detect-package-manager.outputs.manager }} run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
