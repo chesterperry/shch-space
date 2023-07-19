@@ -7,10 +7,10 @@ import SlideShow from "../components/slideshow"
 import LinkBeautifier from "../components/linkBeautifier"
 import IconOutward from "../components/icon.outward"
 import HorizontalLine from "../components/element.hline"
+import TextFormat from "../components/text.format"
 
 export default function Grid({ data, pageContext }) {
   const project = data.allGoogleProjectsSheet.nodes[0]
-  console.log(pageContext)
   return (
     <LayoutGrid>
       <div className="draw-grid-40 min-h-fit w-screen flex justify-center">
@@ -67,7 +67,7 @@ export default function Grid({ data, pageContext }) {
                 <HorizontalLine/>
 
                 <span className="mb-12 uppercase md:text-3xl text-xl  font-light">
-                  {project?.participants}
+                  <TextFormat>{project?.participants}</TextFormat>
                 </span>
               </div>
             )}
@@ -86,7 +86,7 @@ export default function Grid({ data, pageContext }) {
             <SlideShow images={project?.imageSource} />
           </div>
           {project?.comment && (
-            <div className="overflow-visible md:col-span-1 ">
+            <div className="overflow-visible md:col-span-1 mt-8">
               <h4 className="basis-1/3">КОММЕНТАРИЙ</h4>
               <HorizontalLine/>
 

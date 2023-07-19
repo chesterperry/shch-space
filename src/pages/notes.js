@@ -50,7 +50,7 @@ const ProjectsList = () => {
                     setNoteDetails({excerpt: data.excerpt, title:data.frontmatter.title})
                   }
                   onMouseLeave ={() => setNoteDetails(null)}
-                  className="text-lg h-8 hover:underline  hover:decoration-3 mr-3 underline-offset-2"
+                  className="text-lg h-8 hover:underline  hover:decoration-3 hover:decoration-orange-500 mr-3 underline-offset-2 "
                 >
                   <p>{data.frontmatter.title}</p>
                 </div>

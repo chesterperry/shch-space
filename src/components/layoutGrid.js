@@ -25,9 +25,8 @@ const LayoutGrid = ({ children }) => {
 
   return (
 <div className="flex flex-col h-full w-full min-h-screen"> 
-          <div className="flex-none"> <Header  siteTitle={data.site.siteMetadata?.title + '© '+ currentYear || `Title`} /></div> 
-
-        <main className="flex flex-1">{children}</main>
+          <div className="fixed place-content-end "> <Header  siteTitle={data.site.siteMetadata?.title + '© '+ currentYear || `Title`} /></div> 
+        <main className="flex flex-1 mt-6">{children}</main>
     </div>
   )
 }

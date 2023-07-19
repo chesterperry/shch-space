@@ -2,8 +2,8 @@ import * as React from "react"
 import { Link } from "gatsby"
 
 const Header = ({ siteTitle }) => (
-  <header className="my-0 mx-auto p-6 flex items-center justify-between">
-    <Link to="/" className=" text-sm no-underline">
+  <header className="mx-auto md:m-4 m-2 flex items-center justify-between bg-orange-500 px-1.5 bg-opacity-70 ">
+    <Link to="/" className=" text-md no-underline font-medium">
       {siteTitle}
     </Link>
     {/* <img

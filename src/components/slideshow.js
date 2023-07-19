@@ -28,7 +28,6 @@ const SlideShow = ({ images: contentPath }) => {
   const [count, setCount] = useState(0)
   const [isPlaying, togglePlay] = useState(true)
   const [cached, setCached] = useState(false)
-  console.log(cached, count, imageName)
 
   useEffect(() => {
     if (!isPlaying) return;

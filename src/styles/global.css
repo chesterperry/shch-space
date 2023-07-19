@@ -12,7 +12,7 @@
     @apply text-xl;
   }
   a {
-    @apply bg-transparent text-slate-700 font-light underline underline-offset-2 decoration-2  hover:no-underline hover:outline-0;
+    @apply bg-transparent text-slate-700 font-light underline underline-offset-2 decoration-2 decoration-orange-500 hover:no-underline hover:outline-0;
   }
   code {
     @apply bg-orange-100 text-orange-900 border-inherit rounded break-normal p-0.5 font-mono text-sm;

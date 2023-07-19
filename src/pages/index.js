@@ -58,11 +58,11 @@ const ProjectsList = () => {
           </div>
           <div className="mb-12">
               <p>
-              Последние 11 лет работаю в компании <LinkSimple to="https://kixbox.ru">KIXBOX<IconOutward></IconOutward></LinkSimple> Моя работа включала в себя управление такими проектами, как <LinkSimple to='/projects/october-skateshop-2018/'>скейтшоп "Октябрь"</LinkSimple> на Новом Арбате и последующий <LinkSimple to='/projects/october-online-store-2020/'>интернет-магазин</LinkSimple>, организация шоурумов для SM <LinkSimple to='/projects/sm-bread-2019/'>"Хлебзавод"</LinkSimple> и <LinkSimple to='/projects/sm-white-workshop-2019/'>"Цех Белого"</LinkSimple>, а также организация вечеринок с <LinkSimple to='/projects/fred-perry-x-dolphin-2018/'>диджей-сетами Дельфина</LinkSimple>. Я также работал над проектом магазина <LinkSimple to='/projects/fred-perry-aviapark-2016/'>Fred Perry в Москве.</LinkSimple>
+              Последние 11 лет работаю в компании <LinkSimple to="https://kixbox.ru">KIXBOX</LinkSimple> Моя работа включала в себя управление такими проектами, как <LinkSimple to='/projects/october-skateshop-2018/'>скейтшоп "Октябрь"</LinkSimple> на Новом Арбате и последующий <LinkSimple to='/projects/october-online-store-2020/'>интернет-магазин</LinkSimple>, организация шоурумов для SM <LinkSimple to='/projects/sm-bread-2019/'>"Хлебзавод"</LinkSimple> и <LinkSimple to='/projects/sm-white-workshop-2019/'>"Цех Белого"</LinkSimple>, а также организация вечеринок с <LinkSimple to='/projects/fred-perry-x-dolphin-2018/'>диджей-сетами Дельфина</LinkSimple>. Я также работал над проектом магазина <LinkSimple to='/projects/fred-perry-aviapark-2016/'>Fred Perry в Москве.</LinkSimple>
               </p>
 
               <p>
-              В свободное время наслаждаюсь общением с семьей и занимаюсь шоссейным велоспортом. Кроме того, увлекаюсь программированием на JavaScript, веду заметки о дизайне, искусстве и технологиях. Вы можете связаться со мной по почте <LinkSimple to='mailto:oleg.shch@gmail.com'>oleg.shch@gmail.com</LinkSimple> или в <LinkSimple to="https://t.me/olegscherbinin">Telegram</LinkSimple>.
+              В свободное время наслаждаюсь общением с семьей и занимаюсь шоссейным велоспортом. Кроме того, увлекаюсь программированием на JavaScript, <LinkSimple to='/notes/'>веду заметки</LinkSimple> о дизайне, искусстве и технологиях. Вы можете связаться со мной по почте <LinkSimple to='mailto:oleg.shch@gmail.com'>oleg.shch@gmail.com</LinkSimple> или в <LinkSimple to="https://t.me/olegscherbinin">Telegram</LinkSimple>.
               </p>
           </div>
       </div>
@@ -99,7 +99,7 @@ const ProjectsList = () => {
                           slug: data.slug,
                         })
                       }
-                      className="flex flex-wrap text-lg h-8 hover:underline  hover:decoration-3 mr-3 underline-offset-2"
+                      className="flex flex-wrap text-lg h-8 hover:underline  hover:decoration-3 hover:decoration-orange-500 mr-3 underline-offset-2"
                     >
                       <span className="md:basis-3/6 basis-5/6 truncate">
                         {data.project}
