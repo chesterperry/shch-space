@@ -1,10 +1,10 @@
 import * as React from "react"
 
-import LayoutGrid from "../components/layoutGrid"
+import LayoutGrid from "../components/layout.grid"
 import Seo from "../components/seo"
 import { graphql, Link } from "gatsby"
 import SlideShow from "../components/slideshow"
-import LinkBeautifier from "../components/linkBeautifier"
+import LinkBeautifier from "../components/link.beautifier"
 import IconOutward from "../components/icon.outward"
 import HorizontalLine from "../components/element.hline"
 import TextFormat from "../components/text.format"

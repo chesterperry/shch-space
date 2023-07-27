@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import LayoutGrid from "../components/layoutGrid"
+import LayoutGrid from "../components/layout.grid"
 import Seo from "../components/seo"
 import { Link } from "gatsby"
 

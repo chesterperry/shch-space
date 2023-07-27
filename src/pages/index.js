@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import LayoutGrid from "../components/layoutGrid"
+import LayoutGrid from "../components/layout.grid"
 import Seo from "../components/seo"
 import { Link } from "gatsby"
 import { graphql, useStaticQuery } from "gatsby"
@@ -8,7 +8,6 @@ import { ImagePreview } from "../components/imagePreview"
 import { useState } from "react"
 import { useEffect } from "react"
 import LinkSimple from "../components/link.simple"
-import IconOutward from "../components/icon.outward"
 
 const ProjectsList = () => {
     const { googleSheet } = useStaticQuery(graphql`
@@ -58,11 +57,8 @@ const ProjectsList = () => {
           </div>
           <div className="mb-12">
               <p>
-              Последние 11 лет работаю в компании <LinkSimple to="https://kixbox.ru">KIXBOX</LinkSimple> Моя работа включала в себя управление такими проектами, как <LinkSimple to='/projects/october-skateshop-2018/'>скейтшоп "Октябрь"</LinkSimple> на Новом Арбате и последующий <LinkSimple to='/projects/october-online-store-2020/'>интернет-магазин</LinkSimple>, организация шоурумов для SM <LinkSimple to='/projects/sm-bread-2019/'>"Хлебзавод"</LinkSimple> и <LinkSimple to='/projects/sm-white-workshop-2019/'>"Цех Белого"</LinkSimple>, а также организация вечеринок с <LinkSimple to='/projects/fred-perry-x-dolphin-2018/'>диджей-сетами Дельфина</LinkSimple>. Я также работал над проектом магазина <LinkSimple to='/projects/fred-perry-aviapark-2016/'>Fred Perry в Москве.</LinkSimple>
-              </p>
-
-              <p>
-              В свободное время наслаждаюсь общением с семьей и занимаюсь шоссейным велоспортом. Кроме того, увлекаюсь программированием на JavaScript, <LinkSimple to='/notes/'>веду заметки</LinkSimple> о дизайне, искусстве и технологиях. Вы можете связаться со мной по почте <LinkSimple to='mailto:oleg.shch@gmail.com'>oleg.shch@gmail.com</LinkSimple> или в <LinkSimple to="https://t.me/olegscherbinin">Telegram</LinkSimple>.
+              Делаю проекты в компании <LinkSimple to="https://kixbox.ru">KIXBOX</LinkSimple> Собираю сайты на JavaScript, интересуюсь модернистским дизайном, модой и искусством. Занимаюсь шоссейным велоспортом.
+              Вы можете связаться со мной по почте <LinkSimple to='mailto:oleg.shch@gmail.com'>oleg.shch@gmail.com</LinkSimple> или в <LinkSimple to="https://t.me/olegscherbinin">Telegram</LinkSimple>
               </p>
           </div>
       </div>
@@ -73,9 +69,9 @@ const ProjectsList = () => {
           <div className="flex h-30 md:h-60 flex-col">
             <h1 className="h-32" id="projects">ПРОЕКТЫ</h1>
           </div>
-          <div className="md:col-span-2 mb-12">
+          <div className="md:col-span-2 mb-12"><p>
             Список проектов в которых я принимал участие, в таблице указаны
-            год, моя роль и тип проекта. Названия кликабельны. Внутри дополнительные фотографии и комментарий.
+            год, моя роль и тип проекта. Названия кликабельны. Внутри дополнительные фотографии и комментарий.</p>
           </div>
           <div className="md:col-span-2 md:row-span-2 row-span-3">
             {dataFiltered.map(
