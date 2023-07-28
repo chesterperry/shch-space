@@ -57,7 +57,7 @@ const ProjectsList = () => {
           </div>
           <div className="mb-12">
               <p>
-              Делаю проекты в компании <LinkSimple to="https://kixbox.ru">KIXBOX</LinkSimple> Собираю сайты на JavaScript, интересуюсь модернистским дизайном, модой и искусством. Занимаюсь шоссейным велоспортом.
+              Делаю проекты в <LinkSimple to="https://kixbox.ru">KIXBOX</LinkSimple> В свободное время изучаю программирование и разработку, интересуюсь модернистским дизайном, модой и искусством, занимаюсь шоссейным велоспортом.
               Вы можете связаться со мной по почте <LinkSimple to='mailto:oleg.shch@gmail.com'>oleg.shch@gmail.com</LinkSimple> или в <LinkSimple to="https://t.me/olegscherbinin">Telegram</LinkSimple>
               </p>
           </div>
