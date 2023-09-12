@@ -13,7 +13,7 @@ export default function Grid({ data, pageContext }) {
   const project = data.allGoogleProjectsSheet.nodes[0]
   return (
     <LayoutGrid>
-      <div className="draw-grid-40 min-h-fit w-screen flex justify-center">
+      <div className="min-h-fit w-screen flex justify-center">
         <div className="p-2.5 md:p-10 md:w-1/2 w-full max-w-4xl">
           <div className="grid w-full  grid-cols-2 gap-2 flex-none">
             <div className="h-60 col-span-2">

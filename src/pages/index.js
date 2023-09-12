@@ -8,6 +8,7 @@ import { ImagePreview } from "../components/imagePreview"
 import { useState } from "react"
 import { useEffect } from "react"
 import LinkSimple from "../components/link.simple"
+import ImageManipulation from "./image"
 
 const ProjectsList = () => {
     const { googleSheet } = useStaticQuery(graphql`
@@ -29,7 +30,6 @@ const ProjectsList = () => {
   `)
 
   const dataFiltered = googleSheet.projects.filter(el => el.status === "publish" )
-
   const [projectDetails, setProjectDetails] = useState({
     image: null,
     credentials: null,
@@ -49,7 +49,7 @@ const ProjectsList = () => {
   },[])
   return (
     <LayoutGrid>
-        <div className="w-screen flex  flex-col ">
+        <div className="w-screen flex  flex-col">
         <div className="w-screen draw-grid-20 flex flex-row justify-center ">
         <div className="p-2.5 md:p-10  grid  w-full md:max-w-4xl">
         <div className="flex h-30 md:h-60 flex-col ">
@@ -62,7 +62,7 @@ const ProjectsList = () => {
               </p>
           </div>
       </div>
-      <div className="md:grid  hidden max-w-4xl md:basis-1/2"></div>
+      <div className="md:grid hidden max-w-4xl md:basis-1/2 justify-center content-center"><ImageManipulation debug = {false}/></div>
       </div>
       <div className="w-screen draw-grid-20 flex flex-row justify-center min-h-screen">
         <div className="p-2.5 md:p-10  md:basis-1/2 grid md:max-w-4xl w-full">

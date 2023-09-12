@@ -25,7 +25,7 @@ const ProjectsList = () => {
   `)
   return (
     <LayoutGrid>
-      <div className=" w-screen draw-grid-20 flex flex-row justify-center">
+      <div className=" w-screen draw-grid-20 flex flex-row justify-center dark:bg-neutral-900">
         <div className="p-2.5  md:p-10  md:basis-1/2 grid grid-rows-5 max-w-2xl">
           <div className="flex flex-col">
             <h3 className="h-16">

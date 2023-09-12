@@ -12,7 +12,7 @@
     @apply text-xl;
   }
   a {
-    @apply bg-transparent text-slate-700 font-light underline underline-offset-2 decoration-2 decoration-orange-500 hover:no-underline hover:outline-0;
+    @apply bg-transparent text-slate-700 font-light underline underline-offset-2 decoration-2 decoration-orange-500 hover:no-underline hover:outline-0 dark:text-slate-50;
   }
   code {
     @apply bg-orange-100 text-orange-900 border-inherit rounded break-normal p-0.5 font-mono text-sm;
@@ -24,7 +24,7 @@
     @apply text-sm font-normal overflow-y-scroll font-mono;
   }
   body {
-    @apply font-normal antialiased font-mono z-10;
+    @apply font-normal antialiased font-mono z-10 dark:text-slate-50;
   }
   img,
   figure,
@@ -90,6 +90,9 @@
         transparent 5em
         );
     /* background-size: 1em 1em; */
+  }
+  .icon {
+    filter: invert(81%) sepia(6%) saturate(203%) hue-rotate(177deg) brightness(109%) contrast(83%)
   }
 }
 
