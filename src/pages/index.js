@@ -62,7 +62,7 @@ const ProjectsList = () => {
               </p>
           </div>
       </div>
-      <div className="md:grid hidden max-w-4xl md:basis-1/2 justify-center content-center"><ImageManipulation debug = {false}/></div>
+      <div className="md:grid hidden max-w-4xl md:basis-1/2 justify-center content-center"></div>
       </div>
       <div className="w-screen draw-grid-20 flex flex-row justify-center min-h-screen">
         <div className="p-2.5 md:p-10  md:basis-1/2 grid md:max-w-4xl w-full">
