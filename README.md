@@ -13,3 +13,5 @@ Rewrite new global styles with Tailwind
 
 Prepare blog section
 Replace index with projects
+
+- add Garage Work
