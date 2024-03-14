@@ -8,6 +8,7 @@ import { ImagePreview } from "../components/imagePreview"
 import { useState } from "react"
 import { useEffect } from "react"
 import LinkSimple from "../components/link.simple"
+import About from "../components/about"
 
 const ProjectsList = () => {
     const { googleSheet } = useStaticQuery(graphql`
@@ -56,10 +57,7 @@ const ProjectsList = () => {
             <h1 className="h-32">ОБО МНЕ</h1>
           </div>
           <div className="mb-12">
-              <p>
-              Занимаюсь проектами в моде и не только. В свободное время изучаю программирование и разработку, интересуюсь модернистским дизайном, модой и искусством, занимаюсь шоссейным велоспортом.
-              Вы можете связаться со мной по почте <LinkSimple to='mailto:oleg.shch@gmail.com'>oleg.shch@gmail.com</LinkSimple> или в <LinkSimple to="https://t.me/olegscherbinin">Telegram</LinkSimple>
-              </p>
+              <About/>
           </div>
       </div>
       <div className="md:grid  hidden max-w-4xl md:basis-1/2"></div>
