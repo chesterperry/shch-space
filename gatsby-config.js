@@ -23,8 +23,19 @@ module.exports = {
       resolve: 'gatsby-source-google-spreadsheets',
       options: {
         spreadsheetId: '1jUe-z_gbKj5G6uyQ0Ib3C8zTZA9tLXoRssYop0TYO4M',
-        credentials: JSON.parse(process.env.CREDENTIALS),
-
+        credentials: {
+          "type": "service_account",
+          "project_id": "oleg-scherbinin-project",
+          "private_key_id": "850e96c6108c7ef9388f9c6fb971dd891c68937d",
+          "private_key": process.env.PRIVATE_KEY,
+          "client_email": "oleg-personal-gatsby-data@oleg-scherbinin-project.iam.gserviceaccount.com",
+          "client_id": "113342692822999418879",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/oleg-personal-gatsby-data%40oleg-scherbinin-project.iam.gserviceaccount.com",
+          "universe_domain": "googleapis.com"
+        },
       }
     },
     'gatsby-plugin-postcss',
