@@ -27,7 +27,7 @@ module.exports = {
           "type": "service_account",
           "project_id": "oleg-scherbinin-project",
           "private_key_id": "850e96c6108c7ef9388f9c6fb971dd891c68937d",
-          "private_key": process.env.PRIVATE_KEY,
+          "private_key": JSON.parse(process.env.PRIVATE_KEY),
           "client_email": "oleg-personal-gatsby-data@oleg-scherbinin-project.iam.gserviceaccount.com",
           "client_id": "113342692822999418879",
           "auth_uri": "https://accounts.google.com/o/oauth2/auth",
