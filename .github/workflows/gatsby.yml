@@ -78,7 +78,7 @@ jobs:
       - name: create env file
         run: |
          touch .env
-         echo CREDENTIALS=${{ vars.CREDENTIALS }} >> .env
+         echo CREDENTIALS=$CREDENTIALS >> .env
       - name: Build with Gatsby
         env:
           PREFIX_PATHS: 'true'
