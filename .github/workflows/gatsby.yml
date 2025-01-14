@@ -78,7 +78,7 @@ jobs:
       - name: create env file
         run: |
          touch .env
-         echo PRIVATE_KEY="${{ secrets.PRIVATE_KEY }}" >> .env
+         echo CREDENTIALS="$CREDENTIALS" >> .env
          cat .env
       - name: Build with Gatsby
         env:
