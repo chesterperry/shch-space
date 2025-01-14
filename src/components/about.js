@@ -3,10 +3,10 @@ import LinkSimple from "./link.simple"
 
 const About = () => (
   <p>
-    Занимаюсь проектами в моде более 10 лет. Вы можете связаться со мной по
+    Более 10 лет в маркетинге и проект-менеджменте. Работал над магазинами KIXBOX, Fred Perry и скейт-шопом ОКТЯБРЬ. Сейчас развиваю веб-проекты. Открыт для задач в процедурной графике, аналитике и онлайн-ритейле. Вы можете связаться со мной по
     почте{" "}
-    <LinkSimple to="mailto:oleg.shch@gmail.com">oleg.shch@gmail.com</LinkSimple>{" "}
-    или в <LinkSimple to="https://t.me/olegscherbinin">Telegram</LinkSimple>
+    <LinkSimple to="mailto:oleg@shch.one">oleg@shch.one</LinkSimple>{" "}
+    и в <LinkSimple to="https://t.me/olegscherbinin">Telegram</LinkSimple>
   </p>
 )
 

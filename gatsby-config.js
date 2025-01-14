@@ -24,17 +24,19 @@ module.exports = {
       options: {
         spreadsheetId: '1jUe-z_gbKj5G6uyQ0Ib3C8zTZA9tLXoRssYop0TYO4M',
         credentials: {
-          type: "service_account",
-          project_id: "oleg-scherbinin-project",
+          "type": "service_account",
+          "project_id": "oleg-scherbinin-project",
           private_key_id: process.env.PRIVATE_KEY_ID,
           private_key: process.env.PRIVATE_KEY.replace(/(\\r)|(\\n)/g, '\n'),
-          client_email: "os-98-605@oleg-scherbinin-project.iam.gserviceaccount.com",
-          client_id: "108547937349450224895",
-          auth_uri: "https://accounts.google.com/o/oauth2/auth",
-          token_uri: "https://oauth2.googleapis.com/token",
-          auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-          client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/os-98-605%40oleg-scherbinin-project.iam.gserviceaccount.com"
+          "client_email": "oleg-personal-gatsby-data@oleg-scherbinin-project.iam.gserviceaccount.com",
+          "client_id": "113342692822999418879",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/oleg-personal-gatsby-data%40oleg-scherbinin-project.iam.gserviceaccount.com",
+          "universe_domain": "googleapis.com"
         },
+
       }
     },
     'gatsby-plugin-postcss',
