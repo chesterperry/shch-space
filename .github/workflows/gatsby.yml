@@ -78,7 +78,7 @@ jobs:
       - name: create env file
         run: |
          touch .env
-         echo CREDENTIALS="$CREDENTIALS" >> .env
+         echo CREDENTIALS="${{ vars.CREDENTIALS }}" >> .env
          cat .env
       - name: Build with Gatsby
         env:
