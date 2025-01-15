@@ -1377,15 +1377,15 @@
   dependencies:
     "@lezer/common" "^0.15.0"
 
-"@lmdb/lmdb-darwin-arm64@2.5.2":
+"@lmdb/lmdb-darwin-x64@2.5.2":
   version "2.5.2"
-  resolved "https://registry.npmjs.org/@lmdb/lmdb-darwin-arm64/-/lmdb-darwin-arm64-2.5.2.tgz"
-  integrity sha512-+F8ioQIUN68B4UFiIBYu0QQvgb9FmlKw2ctQMSBfW2QBrZIxz9vD9jCGqTCPqZBRbPHAS/vG1zSXnKqnS2ch/A==
+  resolved "https://registry.npmjs.org/@lmdb/lmdb-darwin-x64/-/lmdb-darwin-x64-2.5.2.tgz"
+  integrity sha512-KvPH56KRLLx4KSfKBx0m1r7GGGUMXm0jrKmNE7plbHlesZMuPJICtn07HYgQhj1LNsK7Yqwuvnqh1QxhJnF1EA==
 
-"@lmdb/lmdb-darwin-arm64@2.5.3":
+"@lmdb/lmdb-darwin-x64@2.5.3":
   version "2.5.3"
-  resolved "https://registry.npmjs.org/@lmdb/lmdb-darwin-arm64/-/lmdb-darwin-arm64-2.5.3.tgz"
-  integrity sha512-RXwGZ/0eCqtCY8FLTM/koR60w+MXyvBUpToXiIyjOcBnC81tAlTUHrRUavCEWPI9zc9VgvpK3+cbumPyR8BSuA==
+  resolved "https://registry.npmjs.org/@lmdb/lmdb-darwin-x64/-/lmdb-darwin-x64-2.5.3.tgz"
+  integrity sha512-337dNzh5yCdNCTk8kPfoU7jR3otibSlPDGW0vKZT97rKnQMb9tNdto3RtWoGPsQ8hKmlRZpojOJtmwjncq1MoA==
 
 "@mdx-js/mdx@^2.1.5":
   version "2.2.1"
@@ -1427,10 +1427,10 @@
     "@lezer/lr" "^0.15.4"
     json5 "^2.2.1"
 
-"@msgpackr-extract/msgpackr-extract-darwin-arm64@2.1.2":
+"@msgpackr-extract/msgpackr-extract-darwin-x64@2.1.2":
   version "2.1.2"
-  resolved "https://registry.npmjs.org/@msgpackr-extract/msgpackr-extract-darwin-arm64/-/msgpackr-extract-darwin-arm64-2.1.2.tgz"
-  integrity sha512-TyVLn3S/+ikMDsh0gbKv2YydKClN8HaJDDpONlaZR+LVJmsxLFUgA+O7zu59h9+f9gX1aj/ahw9wqa6rosmrYQ==
+  resolved "https://registry.npmjs.org/@msgpackr-extract/msgpackr-extract-darwin-x64/-/msgpackr-extract-darwin-x64-2.1.2.tgz"
+  integrity sha512-YPXtcVkhmVNoMGlqp81ZHW4dMxK09msWgnxtsDpSiZwTzUBG2N+No2bsr7WMtBKCVJMSD6mbAl7YhKUqkp/Few==
 
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
@@ -5471,6 +5471,11 @@ gatsby-plugin-utils@^4.5.0:
     joi "^17.7.0"
     mime "^3.0.0"
 
+gatsby-plugin-yandex-metrika@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.npmjs.org/gatsby-plugin-yandex-metrika/-/gatsby-plugin-yandex-metrika-2.5.0.tgz"
+  integrity sha512-2dJr9qpAwrKJTNGtr5FJDMIkQd3Kd5l4iNOMGZodvfe5uv7lgy9WH7uoFDeeFSvsg7cg+SKAKETPN1hEUry+zg==
+
 gatsby-react-router-scroll@^6.5.0:
   version "6.5.0"
   resolved "https://registry.npmjs.org/gatsby-react-router-scroll/-/gatsby-react-router-scroll-6.5.0.tgz"
@@ -5573,7 +5578,7 @@ gatsby-worker@^2.5.0:
     fs-extra "^11.1.0"
     signal-exit "^3.0.7"
 
-gatsby@^5.0.0-next, gatsby@^5.5.0:
+"gatsby@^1.0.0 || >2.0.0-alpha", gatsby@^5.0.0-next, gatsby@^5.5.0:
   version "5.5.0"
   resolved "https://registry.npmjs.org/gatsby/-/gatsby-5.5.0.tgz"
   integrity sha512-sSdLS80riRk+8arSO4QVY3uz4Di0hVkEudtrraKRhQCYE3LEzK8be0IVsoQclvZ6x8e1ep4AZa6TmRq0QVDqPA==

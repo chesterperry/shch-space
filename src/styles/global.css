@@ -73,6 +73,12 @@
 }
 
 @layer utilities {
+
+  .fixed-height-img {
+    height: 440px;
+    object-fit: cover;
+    width: 100%;
+  }
   .draw-stripes-10 {
     background: #fff;
     background-image: 

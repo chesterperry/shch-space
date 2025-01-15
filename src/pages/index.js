@@ -9,6 +9,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import LinkSimple from "../components/link.simple"
 import About from "../components/about"
+import FaceGenerator from '../components/face'
 
 const ProjectsList = () => {
     const { googleSheet } = useStaticQuery(graphql`
@@ -36,6 +37,21 @@ const ProjectsList = () => {
     credentials: null,
     project: null,
   })
+  const [delayHandler, setDelayHandler] = useState(null)
+
+  const handleMouseEnter = (data) => {
+    if (delayHandler) clearTimeout(delayHandler);
+    setDelayHandler(
+      setTimeout(() => {
+        setProjectDetails({
+          image: data.imageSource,
+          project: data.project,
+          credentials: data.imageCredentials,
+          slug: data.slug,
+        });
+      }, 250)
+    );
+  };
 
   useEffect (()=> {
     if (dataFiltered.length > 0) {
@@ -45,7 +61,6 @@ const ProjectsList = () => {
         project: dataFiltered[randomProject].project,
         credentials: dataFiltered[randomProject].imageCredentials,
     })
-    console.log(randomProject)
   }  
   },[])
   return (
@@ -60,7 +75,9 @@ const ProjectsList = () => {
               <About/>
           </div>
       </div>
-      <div className="md:grid  hidden max-w-4xl md:basis-1/2"></div>
+
+      <div className="md:grid  hidden max-w-4xl md:basis-1/2">
+      </div>
       </div>
       <div className="w-screen draw-grid-20 flex flex-row justify-center min-h-screen">
         <div className="p-2.5 md:p-10  md:basis-1/2 grid md:max-w-4xl w-full">
@@ -68,8 +85,8 @@ const ProjectsList = () => {
             <h1 className="h-32" id="projects">ПРОЕКТЫ</h1>
           </div>
           <div className="md:col-span-2 mb-12"><p>
-            Список проектов в которых я принимал участие, в таблице указаны
-            год, моя роль и тип проекта. Названия кликабельны. Внутри дополнительные фотографии и комментарий.</p>
+            Список избранных проектов, в таблице указаны
+            год, моя роль и тип. Названия кликабельны. Внутри могут быть дополнительные фотографии и комментарий.</p>
           </div>
           <div className="md:col-span-2 md:row-span-2 row-span-3">
             {dataFiltered.map(
@@ -78,20 +95,10 @@ const ProjectsList = () => {
                   <Link className="no-underline " to={`/projects/${data.slug}`} key={index}>
                     <div
                       key={data.id}
-                      onFocus={() =>
-                        setProjectDetails({
-                          image: data.imageSource,
-                          project: data.project,
-                          credentials: data.imageCredentials,
-                        })
+                      onFocus={() =>handleMouseEnter(data)
                       }
                       onMouseOver={() =>
-                        setProjectDetails({
-                          image: data.imageSource,
-                          project: data.project,
-                          credentials: data.imageCredentials,
-                          slug: data.slug,
-                        })
+                        handleMouseEnter(data)
                       }
                       className="flex flex-wrap text-lg h-8 hover:underline  hover:decoration-3 hover:decoration-orange-500 mr-3 underline-offset-2"
                     >
@@ -119,11 +126,11 @@ const ProjectsList = () => {
             {projectDetails.image &&
               (projectDetails.image.includes(".") ? (
                 <img
-                  className=" self-center justify-center w-full"
+                  className="self-center justify-center fixed-height-img"
                   src={`../../${projectDetails.image}`}
                 />
               ) : (
-                <ImagePreview imageSource={projectDetails.image} />
+                <ImagePreview imageSource={projectDetails.image} className={"self-center justify-center fixed-height-img"}/>
               ))}
           </div>
 
