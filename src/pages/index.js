@@ -9,7 +9,6 @@ import { useState } from "react"
 import { useEffect } from "react"
 import LinkSimple from "../components/link.simple"
 import About from "../components/about"
-import FaceGenerator from '../components/face'
 
 const ProjectsList = () => {
     const { googleSheet } = useStaticQuery(graphql`
