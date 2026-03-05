@@ -15,7 +15,7 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Oleg Scherbinin | shch one `,
+    title: `Студия SHCH `,
     description: ``,
     author: `@olegscherbinin`,
     siteUrl: `https://shch.one/`,
@@ -90,7 +90,7 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/LetterO.png`, // This path is relative to the root of the site.
+        icon: `src/images/shch-ico.png`, // This path is relative to the root of the site.
       },
     },
     {

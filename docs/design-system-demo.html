@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Дизайн-система v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+
+/* ════════════════════════════════════════════════
+   ТОКЕНЫ
+   ════════════════════════════════════════════════ */
+:root {
+  --font-display: "Golos Text", sans-serif;  /* 700/800 — заголовки */
+  --font-body:    "Golos Text", sans-serif;  /* 400/500 — текст    */
+  --font-mono:    "JetBrains Mono", monospace;
+
+  --bg:      #F1EDE6;
+  --ink:     #161412;
+  --accent:  #F97316;
+  --muted:   #7A736C;   /* нейтральный — вместо оранжевого в служебных местах */
+  --surface: #EAE5DC;   /* чуть темнее фона — для выделений */
+  --rule:    rgba(22, 20, 18, 0.1);
+
+  --measure: 62ch;
+  --nav-h:   44px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.05vw, 17px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  overflow-y: scroll;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ════════════════════════════════════════════════
+   НАВИГАЦИЯ
+   ════════════════════════════════════════════════ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  gap: 2rem;
+}
+.nav-logo {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0 0.9rem;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* ════════════════════════════════════════════════
+   ТИПОГРАФИКА
+   ════════════════════════════════════════════════ */
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7.5vw, 6rem);
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+h1 b { color: var(--accent); font-weight: 800; }
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* Лейбл */
+.label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+}
+.label-accent { color: var(--accent); }
+
+p {
+  font-size: clamp(0.95rem, 1.25vw, 1.05rem);
+  font-weight: 400;
+  line-height: 1.72;
+  max-width: var(--measure);
+}
+
+a {
+  color: var(--ink);
+  font-weight: 400;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  transition: color .15s;
+}
+a:hover { color: var(--accent); text-decoration-color: transparent; }
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--surface);
+  border-radius: 2px;
+  padding: 0.1em 0.4em;
+}
+
+b, strong { font-weight: 500; }
+mark { background: var(--accent); color: #fff; padding: 0 .2em; }
+
+hr { border: none; border-top: 1px solid var(--rule); }
+
+blockquote {
+  border-left: 1.5px solid var(--ink);
+  padding: 0.4rem 1.25rem;
+}
+blockquote p {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.15;
+  max-width: none;
+}
+
+/* ════════════════════════════════════════════════
+   LAYOUT
+   ════════════════════════════════════════════════ */
+.wrap {
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+.section {
+  padding-block: clamp(3rem, 7vw, 7rem);
+  border-top: 1px solid var(--rule);
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+@media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+/* ════════════════════════════════════════════════
+   КНОПКА — без анимации, статичный hover
+   ════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  padding: 0.65rem 1.5rem;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+}
+.btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+.btn:disabled, .btn[disabled] {
+  opacity: 0.28;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Вариант со стрелкой */
+.btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+}
+.btn-arrow-text {
+  border-bottom: 1.5px solid var(--ink);
+  padding-bottom: 1px;
+}
+.btn-arrow-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: var(--ink);
+  color: var(--bg);
+  margin-left: 0.6rem;
+  font-style: normal;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.btn-arrow:hover .btn-arrow-text { border-bottom-color: var(--accent); color: var(--accent); }
+.btn-arrow:hover .btn-arrow-icon { background: var(--accent); }
+
+/* ════════════════════════════════════════════════
+   ФОРМА — underline-only
+   ════════════════════════════════════════════════ */
+.field-wrap { display: grid; gap: 0.35rem; }
+.field-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.field-input {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(22,20,18,0.25);
+  padding: 0.4rem 0;
+  width: 100%;
+  transition: border-color .2s;
+}
+.field-input:focus { outline: none; border-color: var(--ink); }
+.field-input::placeholder { color: rgba(22,20,18,0.3); }
+
+/* ════════════════════════════════════════════════
+   КОД-БЛОК — monoширинный
+   ════════════════════════════════════════════════ */
+.code-block {
+  background: var(--ink);
+  color: #E8E2D9;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.7;
+  padding: 1.5rem 1.75rem;
+  overflow-x: auto;
+  position: relative;
+}
+.code-block .c-keyword  { color: #F97316; }
+.code-block .c-string   { color: #A8D8A8; }
+.code-block .c-comment  { color: #7A736C; font-style: italic; }
+.code-block .c-prop     { color: #94C4D4; }
+.code-block .c-num      { color: #C8A4D4; }
+.code-lang {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ════════════════════════════════════════════════
+   ТАБЛИЦА
+   ════════════════════════════════════════════════ */
+.table-wrap { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--ink);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: middle;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--surface); }
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2em 0.55em;
+  border-radius: 1px;
+}
+.badge-active   { background: rgba(249,115,22,0.12); color: var(--accent); }
+.badge-draft    { background: var(--surface); color: var(--muted); }
+.badge-archived { background: rgba(22,20,18,0.06); color: var(--muted); }
+
+/* ════════════════════════════════════════════════
+   ИЗОБРАЖЕНИЯ
+   ════════════════════════════════════════════════ */
+.img-single {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+}
+
+.img-caption {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.6rem;
+  font-style: italic;
+}
+
+/* Горизонтальный скролл */
+.img-scroll-wrap {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(22,20,18,.2) transparent;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+}
+.img-scroll-wrap:active { cursor: grabbing; }
+.img-scroll-wrap::-webkit-scrollbar { height: 3px; }
+.img-scroll-wrap::-webkit-scrollbar-thumb { background: rgba(22,20,18,.2); }
+
+.img-scroll-track {
+  display: flex;
+  gap: 2px;
+  width: max-content;
+  padding-bottom: 2px;
+}
+.img-scroll-item {
+  flex-shrink: 0;
+  width: 340px;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+.img-scroll-item.wide { width: 520px; aspect-ratio: 16/9; }
+
+/* ════════════════════════════════════════════════
+   ПЛИТКА — посты / проекты
+   ════════════════════════════════════════════════ */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 2px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  transition: border-color .2s, background .2s;
+  position: relative;
+}
+.tile:hover { border-color: var(--ink); background: var(--surface); }
+.tile:hover .tile-arrow { transform: translateX(4px); }
+
+.tile-cover {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--rule);
+}
+
+.tile-body {
+  padding: 1.25rem 1.25rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tile-meta {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tile-title {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.tile-excerpt {
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--muted);
+  flex: 1;
+}
+
+.tile-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+.tile-arrow {
+  font-size: 1rem;
+  color: var(--accent);
+  transition: transform .2s ease;
+  line-height: 1;
+}
+
+/* Плитка без обложки — текстовая */
+.tile-text .tile-body { padding: 1.5rem; }
+
+/* ════════════════════════════════════════════════
+   БЛОКИ ИНФОРМАЦИИ
+   ════════════════════════════════════════════════ */
+.alert {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 1rem;
+  padding: 1rem 1.25rem;
+  border-left: 2px solid;
+  align-items: start;
+}
+
+.alert-icon {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding-top: 0.2rem;
+  white-space: nowrap;
+}
+
+.alert-body p {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  max-width: none;
+  margin: 0;
+}
+
+.alert-body p + p { margin-top: 0.5rem; }
+
+.alert-title {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+/* Варианты */
+.alert-info {
+  border-color: #5B8DB8;
+  background: rgba(91,141,184,0.07);
+}
+.alert-info .alert-icon { color: #5B8DB8; }
+.alert-info .alert-title { color: #3A6B94; }
+
+.alert-warning {
+  border-color: var(--accent);
+  background: rgba(249,115,22,0.07);
+}
+.alert-warning .alert-icon { color: var(--accent); }
+.alert-warning .alert-title { color: #C2570A; }
+
+.alert-danger {
+  border-color: #C0392B;
+  background: rgba(192,57,43,0.07);
+}
+.alert-danger .alert-icon { color: #C0392B; }
+.alert-danger .alert-title { color: #9B2B20; }
+
+.alert-success {
+  border-color: #4A8C6F;
+  background: rgba(74,140,111,0.07);
+}
+.alert-success .alert-icon { color: #4A8C6F; }
+.alert-success .alert-title { color: #36674F; }
+
+.alert-neutral {
+  border-color: var(--muted);
+  background: var(--surface);
+}
+.alert-neutral .alert-icon { color: var(--muted); }
+.alert-neutral .alert-title { color: var(--ink); }
+
+/* Шкала типографики */
+.type-row {
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  gap: 0 1.5rem;
+  align-items: baseline;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.type-row:first-child { border-top: 1px solid var(--rule); }
+.type-meta {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 0.15rem;
+  line-height: 1.7;
+}
+@media (max-width: 580px) {
+  .type-row { grid-template-columns: 1fr; gap: 0.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">ДС<span>·</span>01</a>
+    <ul class="nav-links">
+      <li><a href="#type" class="active">Типографика</a></li>
+      <li><a href="#comp">Компоненты</a></li>
+      <li><a href="#media">Медиа</a></li>
+      <li><a href="#tiles">Плитка</a></li>
+      <li><a href="#alerts">Инфо</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="wrap" style="padding-block: clamp(4rem,10vw,9rem);">
+  <div class="label" style="margin-bottom:1.5rem;">Дизайн-система — v3</div>
+  <h1>Меньше.<br><b>Точнее.</b></h1>
+  <p style="margin-top:1.75rem; max-width:46ch; font-size:clamp(1rem,1.5vw,1.15rem); opacity:.7;">
+    Три цвета и нейтральный. Два шрифта с кириллицей
+    плюс моноширинный. Никаких украшений.
+  </p>
+  <div style="margin-top:2rem;">
+    <a class="btn" href="#comp">Смотреть компоненты</a>
+  </div>
+</div>
+
+<!-- ══ ТИПОГРАФИКА ══ -->
+<section id="type" class="section">
+  <div class="wrap">
+    <div class="label" style="margin-bottom:2.5rem;">01 — Типографика</div>
+
+    <div>
+      <div class="type-row">
+        <div class="type-meta">h1 · Golos Text 800<br>clamp(2.8rem,7.5vw,6rem)<br>lh 0.96 · ls −0.03em</div>
+        <h1 style="font-size:clamp(2rem,5vw,4.2rem);">Заголовок <b>страницы</b></h1>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">h2 · Golos Text 700<br>clamp(1.6rem,3.5vw,2.6rem)<br>lh 1.08 · ls −0.02em</div>
+        <h2 style="font-size:clamp(1.4rem,3vw,2.2rem);">Раздел интерфейса</h2>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">h3 · Golos Text 700<br>clamp(0.95rem,1.5vw,1.1rem)<br>ls −0.01em</div>
+        <h3>Подраздел или метка</h3>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">.label · Golos Text 500<br>0.65rem · ls 0.14em<br>uppercase · цвет --muted</div>
+        <span class="label" style="font-size:.75rem; display:inline;">Мета-метка / категория</span>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">body · Golos Text 400<br>clamp(.95rem,1.25vw,1.05rem)<br>lh 1.72 · max 62ch</div>
+        <p>
+          Основной текст — Golos Text. Современный нейтральный гротеск
+          с отличной кириллицей. Ширина колонки <code>62ch</code>.
+          <a href="#">Ссылки подчёркнуты акцентным цветом.</a>
+          Выделение <mark>оранжевым</mark> — только для смыслового акцента.
+        </p>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">small · Golos Text 400<br>0.85rem · color --muted</div>
+        <p style="font-size:.85rem; color:var(--muted); max-width:52ch;">
+          Подписи, мета, сноски. Тот же шрифт, меньший размер, нейтральный цвет
+          вместо пониженной прозрачности — чище на разных фонах.
+        </p>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">mono · JetBrains Mono<br>0.82rem · bg --surface</div>
+        <p><code>const system = { fonts: 3, colors: 4 }</code></p>
+      </div>
+    </div>
+
+    <!-- Шрифтовые пары -->
+    <div style="margin-top:3rem; padding-top:3rem; border-top:1px solid var(--rule);">
+      <div class="label" style="margin-bottom:1.5rem;">Один шрифт — два начертания</div>
+      <div class="two-col">
+        <div>
+          <div class="type-meta" style="margin-bottom:.75rem;">Golos Text 800 — заголовки</div>
+          <div style="font-family:var(--font-body); font-weight:800;
+                      font-size:2.4rem; line-height:1.05; letter-spacing:-0.03em;">
+            Аа Бб Вв<br>
+            <span style="color:var(--accent);">Гг Дд Её</span>
+          </div>
+          <div style="font-family:var(--font-body); font-size:.82rem;
+                      color:var(--muted); margin-top:.5rem;">
+            700 · 800 — кириллица ✓
+          </div>
+        </div>
+        <div>
+          <div class="type-meta" style="margin-bottom:.75rem;">Golos Text 400 — текст</div>
+          <div style="font-family:var(--font-body); font-weight:400;
+                      font-size:1.6rem; line-height:1.35;">
+            Аа Бб Вв Гг Дд Её<br>
+            Жж Зз Ии Йй Кк Лл
+          </div>
+          <div style="font-family:var(--font-body); font-size:.82rem;
+                      color:var(--muted); margin-top:.5rem;">
+            400 · 500 — кириллица ✓
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ КОМПОНЕНТЫ ══ -->
+<section id="comp" class="section">
+  <div class="wrap">
+    <div class="label" style="margin-bottom:2.5rem;">02 — Компоненты</div>
+
+    <div style="display:grid; gap:3.5rem;">
+
+      <!-- Кнопка -->
+      <div>
+        <div class="type-meta" style="margin-bottom:1.25rem;">Кнопка</div>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+          <button class="btn">Основное действие</button>
+          <a class="btn-arrow" href="#">
+            <span class="btn-arrow-text">Смотреть все проекты</span>
+            <span class="btn-arrow-icon">→</span>
+          </a>
+          <button class="btn" disabled>Недоступно</button>
+        </div>
+        <p style="font-size:.82rem; color:var(--muted); margin-top:1rem; max-width:48ch;">
+          Hover: цвет меняется мягко за 0.25s, трекинг немного расширяется.
+          Одна кнопка на интерфейс — конкретное, единственное действие.
+        </p>
+      </div>
+
+      <hr />
+
+      <!-- Форма -->
+      <div>
+        <div class="type-meta" style="margin-bottom:1.25rem;">Форма</div>
+        <div style="display:grid; gap:1.25rem; max-width:380px;">
+          <div class="field-wrap">
+            <label class="field-label" for="f1">Имя проекта</label>
+            <input class="field-input" id="f1" type="text" placeholder="Введите название" />
+          </div>
+          <div class="field-wrap">
+            <label class="field-label" for="f2">Описание</label>
+            <input class="field-input" id="f2" type="text" placeholder="Одна строка, кратко" />
+          </div>
+          <div style="margin-top:.25rem;">
+            <button class="btn">Сохранить</button>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Таблица -->
+      <div>
+        <div class="type-meta" style="margin-bottom:1.25rem;">Таблица</div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Проект</th>
+                <th>Тип</th>
+                <th>Дата</th>
+                <th>Статус</th>
+                <th style="text-align:right;">Просмотры</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Редизайн навигации</strong></td>
+                <td style="color:var(--muted);">UX / Интерфейс</td>
+                <td style="color:var(--muted); white-space:nowrap;">14 фев 2025</td>
+                <td><span class="badge badge-active">Активно</span></td>
+                <td style="text-align:right; font-family:var(--font-mono); font-size:.85rem;">2 841</td>
+              </tr>
+              <tr>
+                <td><strong>Дизайн-система v3</strong></td>
+                <td style="color:var(--muted);">Система / Токены</td>
+                <td style="color:var(--muted); white-space:nowrap;">01 янв 2025</td>
+                <td><span class="badge badge-active">Активно</span></td>
+                <td style="text-align:right; font-family:var(--font-mono); font-size:.85rem;">1 204</td>
+              </tr>
+              <tr>
+                <td><strong>Типографика для СМИ</strong></td>
+                <td style="color:var(--muted);">Типографика</td>
+                <td style="color:var(--muted); white-space:nowrap;">08 дек 2024</td>
+                <td><span class="badge badge-draft">Черновик</span></td>
+                <td style="text-align:right; font-family:var(--font-mono); font-size:.85rem;">—</td>
+              </tr>
+              <tr>
+                <td><strong>Иконки 2023</strong></td>
+                <td style="color:var(--muted);">Иллюстрация</td>
+                <td style="color:var(--muted); white-space:nowrap;">30 окт 2023</td>
+                <td><span class="badge badge-archived">Архив</span></td>
+                <td style="text-align:right; font-family:var(--font-mono); font-size:.85rem;">9 017</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- Код-блок -->
+      <div>
+        <div class="type-meta" style="margin-bottom:1.25rem;">Поле кода — JetBrains Mono</div>
+        <div class="code-block">
+          <span class="code-lang">CSS</span>
+<span class="c-comment">/* Один шрифт, два начертания */</span>
+<span class="c-keyword">:root</span> {
+  <span class="c-prop">--font-display</span>: <span class="c-string">"Golos Text"</span>, sans-serif;
+  <span class="c-prop">--font-body</span>:    <span class="c-string">"Golos Text"</span>, sans-serif;
+  <span class="c-prop">--font-mono</span>:    <span class="c-string">"JetBrains Mono"</span>, monospace;
+}
+
+<span class="c-keyword">h1</span> {
+  <span class="c-prop">font-weight</span>: <span class="c-num">800</span>;
+  <span class="c-prop">letter-spacing</span>: <span class="c-num">-0.03em</span>;
+  <span class="c-prop">line-height</span>: <span class="c-num">0.96</span>;
+}
+
+<span class="c-comment">/* Кнопка — без transition */</span>
+<span class="c-keyword">.btn</span> { <span class="c-prop">background</span>: <span class="c-string">var(--ink)</span>; }
+<span class="c-keyword">.btn:hover</span> { <span class="c-prop">background</span>: <span class="c-string">var(--accent)</span>; }</div>
+      </div>
+
+      <hr />
+
+      <!-- Цитата и inline -->
+      <div class="two-col">
+        <div>
+          <div class="type-meta" style="margin-bottom:1.25rem;">Цитата</div>
+          <blockquote>
+            <p>Форма следует <b style="color:var(--accent);">функции.</b></p>
+          </blockquote>
+        </div>
+        <div>
+          <div class="type-meta" style="margin-bottom:1.25rem;">Inline-элементы</div>
+          <p>
+            Выделение <mark>оранжевым</mark>, инлайн <code>font-mono</code>,
+            <strong>усиление</strong>, <a href="#">ссылка</a>.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ МЕДИА ══ -->
+<section id="media" class="section">
+  <div class="wrap">
+    <div class="label" style="margin-bottom:2.5rem;">03 — Медиа</div>
+
+    <div style="display:grid; gap:3rem;">
+
+      <!-- Одно изображение -->
+      <div>
+        <div class="type-meta" style="margin-bottom:1rem;">Одиночное изображение</div>
+        <img
+          class="img-single"
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80"
+          alt="Горный пейзаж на рассвете"
+        />
+        <p class="img-caption">
+          Рассвет в горах, Швейцария — пример полноширинного изображения
+          с соотношением 16:9.
+        </p>
+      </div>
+
+      <!-- Горизонтальный скролл -->
+      <div>
+        <div class="type-meta" style="margin-bottom:1rem;">
+          Серия — горизонтальный скролл
+          <span style="font-size:.6rem; opacity:.5; margin-left:.5rem;">← потяните</span>
+        </div>
+        <div class="img-scroll-wrap" id="imgScroll">
+          <div class="img-scroll-track">
+            <img class="img-scroll-item"
+              src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=80"
+              alt="Горы 1" />
+            <img class="img-scroll-item wide"
+              src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900&q=80"
+              alt="Горы 2" />
+            <img class="img-scroll-item"
+              src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=700&q=80"
+              alt="Горы 3" />
+            <img class="img-scroll-item"
+              src="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?w=700&q=80"
+              alt="Горы 4" />
+            <img class="img-scroll-item wide"
+              src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=900&q=80"
+              alt="Горы 5" />
+          </div>
+        </div>
+        <p class="img-caption" style="margin-top:.6rem;">
+          Серия из 5 снимков — смешанная ширина (4:3 и 16:9),
+          gap 2px, drag-scroll.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ ПЛИТКА ══ -->
+<section id="tiles" class="section">
+  <div class="wrap">
+    <div class="label" style="margin-bottom:2.5rem;">04 — Плитка проектов / постов</div>
+
+    <div class="tile-grid">
+
+      <!-- С обложкой -->
+      <a class="tile" href="#">
+        <img class="tile-cover"
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+          alt="Обложка проекта" />
+        <div class="tile-body">
+          <div class="tile-meta">Типографика · 14 фев 2025</div>
+          <div class="tile-title">Система типографики для медиа-проекта</div>
+          <div class="tile-excerpt">
+            Как выстроить иерархию шрифтов для большого редакционного сайта
+            с тремя языками.
+          </div>
+        </div>
+        <div class="tile-footer"><span class="tile-arrow">→</span></div>
+      </a>
+
+      <!-- С обложкой -->
+      <a class="tile" href="#">
+        <img class="tile-cover"
+          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80"
+          alt="Обложка проекта" />
+        <div class="tile-body">
+          <div class="tile-meta">UX · 01 янв 2025</div>
+          <div class="tile-title">Навигация без компромиссов</div>
+          <div class="tile-excerpt">
+            Редизайн основного меню: от громоздкого дропдауна
+            к лёгкой sticky-полосе.
+          </div>
+        </div>
+        <div class="tile-footer"><span class="tile-arrow">→</span></div>
+      </a>
+
+      <!-- Текстовая, без обложки -->
+      <a class="tile tile-text" href="#">
+        <div class="tile-body">
+          <div class="tile-meta">Заметки · 10 дек 2024</div>
+          <div class="tile-title">О пользе ограничений в дизайне</div>
+          <div class="tile-excerpt">
+            Три цвета вместо двенадцати. Один шрифт вместо пяти.
+            Почему меньше часто значит больше — и когда это неправда.
+          </div>
+        </div>
+        <div class="tile-footer"><span class="tile-arrow">→</span></div>
+      </a>
+
+      <!-- Текстовая, без обложки -->
+      <a class="tile tile-text" href="#">
+        <div class="tile-body">
+          <div class="tile-meta">Токены · 05 ноя 2024</div>
+          <div class="tile-title">CSS Custom Properties как дизайн-токены</div>
+          <div class="tile-excerpt">
+            Как организовать переменные так, чтобы система масштабировалась
+            без боли при смене темы или бренда.
+          </div>
+        </div>
+        <div class="tile-footer"><span class="tile-arrow">→</span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ БЛОКИ ИНФОРМАЦИИ ══ -->
+<section id="alerts" class="section">
+  <div class="wrap">
+    <div class="label" style="margin-bottom:2.5rem;">05 — Информационные блоки</div>
+
+    <div style="display:grid; gap:2px; max-width:760px;">
+
+      <div class="alert alert-info">
+        <div class="alert-icon">Инфо</div>
+        <div class="alert-body">
+          <div class="alert-title">Примечание</div>
+          <p>
+            Это информационный блок — нейтральный, без срочности.
+            Используйте для уточнений, примечаний и контекстных подсказок.
+          </p>
+        </div>
+      </div>
+
+      <div class="alert alert-success">
+        <div class="alert-icon">Ок</div>
+        <div class="alert-body">
+          <div class="alert-title">Успешно</div>
+          <p>
+            Действие выполнено. Данные сохранены,
+            изменения применены к системе.
+          </p>
+        </div>
+      </div>
+
+      <div class="alert alert-warning">
+        <div class="alert-icon">Важно</div>
+        <div class="alert-body">
+          <div class="alert-title">Обратите внимание</div>
+          <p>
+            Это изменение затронет все вложенные компоненты.
+            Убедитесь, что вы понимаете последствия перед продолжением.
+          </p>
+        </div>
+      </div>
+
+      <div class="alert alert-danger">
+        <div class="alert-icon">Стоп</div>
+        <div class="alert-body">
+          <div class="alert-title">Критическая ошибка</div>
+          <p>
+            Операция не может быть выполнена. Проверьте права доступа
+            или обратитесь к администратору системы.
+          </p>
+        </div>
+      </div>
+
+      <div class="alert alert-neutral">
+        <div class="alert-icon">—</div>
+        <div class="alert-body">
+          <div class="alert-title">Устарело</div>
+          <p>
+            Этот компонент помечен как устаревший и будет удалён
+            в следующей мажорной версии. Мигрируйте на <code>TileGrid</code>.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="border-top:1px solid var(--rule); padding-block:1.25rem; margin-top:0;">
+  <div class="wrap" style="display:flex; justify-content:space-between;
+                            align-items:center; flex-wrap:wrap; gap:1rem;">
+    <span style="font-family:var(--font-display); font-size:.58rem; font-weight:400;
+                  letter-spacing:.2em; text-transform:uppercase; color:var(--muted);">
+      Golos Text 400 / 500 / 700 / 800 · JetBrains Mono — #F1EDE6 / #161412 / #F97316 / #7A736C
+    </span>
+    <a class="btn" href="#" style="font-size:.68rem; padding:.38rem .9rem;">↑</a>
+  </div>
+</footer>
+
+<script>
+/* Активная ссылка nav */
+const sections = document.querySelectorAll('section[id]');
+const links    = document.querySelectorAll('.nav-links a');
+const navIO    = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const m = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (m) m.classList.add('active');
+    }
+  });
+}, { threshold: 0.35 });
+sections.forEach(s => navIO.observe(s));
+
+/* Drag-scroll для серии изображений */
+const scroller = document.getElementById('imgScroll');
+let isDown = false, startX, scrollLeft;
+scroller.addEventListener('mousedown', e => {
+  isDown = true;
+  startX = e.pageX - scroller.offsetLeft;
+  scrollLeft = scroller.scrollLeft;
+});
+scroller.addEventListener('mouseleave', () => isDown = false);
+scroller.addEventListener('mouseup',    () => isDown = false);
+scroller.addEventListener('mousemove',  e => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - scroller.offsetLeft;
+  scroller.scrollLeft = scrollLeft - (x - startX) * 1.2;
+});
+
+/* Smooth scroll */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>

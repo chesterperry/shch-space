@@ -1,4 +1,5 @@
 import * as React from "react"
+import ReactMarkdown from "react-markdown"
 
 import LayoutGrid from "../components/layout.grid"
 import Seo from "../components/seo"
@@ -90,7 +91,7 @@ export default function Grid({ data, pageContext }) {
               <h4 className="basis-1/3">КОММЕНТАРИЙ</h4>
               <HorizontalLine/>
 
-              <p className="basis-2/3 ">{project?.comment}</p>
+              <div className="basis-2/3 prose max-w-none mt-5"><ReactMarkdown >{project?.comment}</ReactMarkdown></div>
             </div>
           )}
           <div className="grid grid-cols-2 mt-16">

@@ -1,4 +1,5 @@
 import * as React from "react"
+import { StaticImage } from "gatsby-plugin-image"
 
 import LayoutGrid from "../components/layout.grid"
 import Seo from "../components/seo"
@@ -7,8 +8,8 @@ import { graphql, useStaticQuery } from "gatsby"
 import { ImagePreview } from "../components/imagePreview"
 import { useState } from "react"
 import { useEffect } from "react"
-import LinkSimple from "../components/link.simple"
 import About from "../components/about"
+import shchLogo from "../images/shch.svg"
 
 const ProjectsList = () => {
     const { googleSheet } = useStaticQuery(graphql`
@@ -60,16 +61,25 @@ const ProjectsList = () => {
         project: dataFiltered[randomProject].project,
         credentials: dataFiltered[randomProject].imageCredentials,
     })
-  }  
+  }
   },[])
   return (
     <LayoutGrid>
-        <div className="w-screen flex  flex-col ">
-        <div className="w-screen draw-grid-20 flex flex-row justify-center ">
-        <div className="p-2.5 md:p-10  grid  w-full md:max-w-4xl">
-        <div className="flex h-30 md:h-60 flex-col ">
-            <h1 className="h-32">ОБО МНЕ</h1>
-          </div>
+      <div className="w-screen flex  flex-col">
+        <div className="w-screen mt-5 mb-10">
+          <img
+            src={shchLogo}
+            alt="shch logo"
+            className="absolute top-20 left-1/2 -translate-x-1/2 w-30 h-30 z-10"
+          />
+        </div>
+
+        <div className="w-screen mt-32 draw-grid-20 flex flex-row justify-center ">
+          <div className="p-2.5 md:p-10  grid  w-full md:max-w-4xl ">
+        <div className="flex mt-12 h-60 md:h-60 flex-col ">
+            <h1 className="h-32">О НАС</h1>
+
+            </div>
           <div className="mb-12">
               <About/>
           </div>
@@ -79,13 +89,12 @@ const ProjectsList = () => {
       </div>
       </div>
       <div className="w-screen draw-grid-20 flex flex-row justify-center min-h-screen">
-        <div className="p-2.5 md:p-10  md:basis-1/2 grid md:max-w-4xl w-full">
-          <div className="flex h-30 md:h-60 flex-col">
+        <div className="p-2.5 md:p-10  grid  w-full md:max-w-4xl ">
+          <div className="flex h-30 md:h-30 flex-col">
             <h1 className="h-32" id="projects">ПРОЕКТЫ</h1>
           </div>
           <div className="md:col-span-2 mb-12"><p>
-            Список избранных проектов, в таблице указаны
-            год, моя роль и тип. Названия кликабельны. Внутри могут быть дополнительные фотографии и комментарий.</p>
+            Список наших избранных проектов. Названия кликабельны. Внутри могут быть дополнительные фотографии и комментарий.</p>
           </div>
           <div className="md:col-span-2 md:row-span-2 row-span-3">
             {dataFiltered.map(
@@ -109,9 +118,6 @@ const ProjectsList = () => {
                       </span>
                       <span className="md:basis-1/6 md:flex hidden truncate">
                         {data.object}
-                      </span>
-                      <span className="md:basis-1/6 md:flex hidden place-content-center">
-                        {data.roleCode}
                       </span>
                     </div>
                   </Link>
