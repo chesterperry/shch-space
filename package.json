@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.21",
+    "autoprefixer": "^10.5.5",
+    "postcss": "^8.5.28",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
     "tailwindcss": "^3.2.4",
@@ -41,6 +41,11 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "sharp"
-    ]
+    ],
+    "overrides": {
+      "picomatch@2.3.1": "2.3.2",
+      "picomatch@4.0.3": "4.0.7",
+      "postcss-selector-parser@6.1.2": "6.1.4"
+    }
   }
 }
