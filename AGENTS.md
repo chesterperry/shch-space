@@ -17,7 +17,8 @@ write to S3, commit, or push without explicit owner authorization.
 - Routes: `src/pages/`.
 - Shared shell and metadata: `src/layouts/BaseLayout.astro`.
 - Shared components: `src/components/*.astro`.
-- Visual system: `src/styles/global.css` and `docs/design-system.md`.
+- Visual system: the laconic pre-redesign theme is implemented in
+  `src/styles/global.css`; commit `71fa649` is the visual reference.
 - Public assets: `static/` (`publicDir` is configured explicitly).
 - Package manager: pnpm.
 
@@ -69,6 +70,7 @@ workflow run or a `master` commit containing `[deploy]`. Treat either trigger as
 a production mutation requiring explicit approval and an independent public
 read-back.
 
-The pre-Astro implementation remains recoverable from Git history. Do not restore
-individual legacy files into the Astro tree; revert the migration as one coherent
-change if rollback is required.
+The pre-Astro Gatsby implementation remains recoverable from Git history, but it
+is no longer the rollback target for ordinary visual changes. Preserve Astro and
+port only the required visual behavior. The last pre-restoration Astro release is
+`b1b9b2c6e52be6a6f199005708545bb2247e4c48`.

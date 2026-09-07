@@ -1,162 +1,142 @@
 ---
-import { Image } from "astro:assets"
+import { getImage } from "astro:assets"
 import { getCollection } from "astro:content"
 
 import About from "../components/About.astro"
-import IconArrow from "../components/IconArrow.astro"
+import shchMark from "../images/shch-ico.png"
 import BaseLayout from "../layouts/BaseLayout.astro"
-import { byOrder, excerpt, isPublished, isRussian } from "../lib/content"
+import { byOrder, isPublished, isRussian } from "../lib/content"
 
-const entries = await getCollection("site")
-const published = entries.filter(
-  entry => isPublished(entry) && isRussian(entry),
+const projects = (await getCollection("site"))
+  .filter(
+    entry =>
+      isPublished(entry) && isRussian(entry) && entry.data.type === "project",
+  )
+  .sort(byOrder)
+
+const preparedProjects = await Promise.all(
+  projects.map(async project => ({
+    project,
+    preview: project.data.cover
+      ? await getImage({
+          src: project.data.cover,
+          width: 1200,
+          quality: 86,
+          format: "webp",
+        })
+      : undefined,
+  })),
 )
-const projects = published
-  .filter(entry => entry.data.type === "project")
-  .sort(byOrder)
-const notes = published
-  .filter(entry => entry.data.type === "note")
-  .sort(byOrder)
-  .slice(0, 3)
+
+const initialProject = preparedProjects[0]
 ---
 
-<BaseLayout title="SHCH – цифровые продукты">
-  <section class="hero">
-    <div class="hero__heading">
-      <h1>
-        Продукты,<br />
-        сервисы<br />
-        и системы
-      </h1>
+<BaseLayout title="Студия SHCH">
+  <section class="legacy-logo" aria-label="SHCH">
+    <img src={shchMark.src} width="111" height="106" alt="SHCH" />
+  </section>
+
+  <section class="legacy-split legacy-about">
+    <div class="legacy-panel legacy-panel--left">
+      <header class="legacy-title-block">
+        <h1>О НАС</h1>
+      </header>
+      <About />
     </div>
-    <div class="hero__footer">
-      <p>
-        Исследования, разработка и запуск цифровых продуктов для коммерции и
-        операционной работы
+    <div class="legacy-panel legacy-panel--empty" aria-hidden="true"></div>
+  </section>
+
+  <section class="legacy-split legacy-projects" id="projects">
+    <div class="legacy-panel legacy-panel--left">
+      <header class="legacy-title-block legacy-title-block--projects">
+        <h1>ПРОЕКТЫ</h1>
+      </header>
+      <p class="legacy-intro">
+        Список наших избранных проектов. Названия кликабельны. Внутри могут быть
+        дополнительные фотографии и комментарий.
       </p>
-      <a class="hero__link" href="/#work">
-        К проектам <IconArrow direction="down" />
-      </a>
-    </div>
-  </section>
-
-  <section class="section-block section-rule" id="approach">
-    <div class="section-heading">
-      <span class="section-label">Подход</span>
-      <h2>
-        От исследования<br />
-        до запуска
-      </h2>
-    </div>
-    <About />
-    <div class="service-grid">
-      <div>
-        <span>01</span>
-        <h3>Исследовать</h3>
-        <p>Контекст, пользователи, ограничения и гипотезы</p>
-      </div>
-      <div>
-        <span>02</span>
-        <h3>Спроектировать</h3>
-        <p>Структура, сценарии и интерфейсы</p>
-      </div>
-      <div>
-        <span>03</span>
-        <h3>Собрать</h3>
-        <p>Сервисы, платформы и внутренние системы</p>
-      </div>
-      <div>
-        <span>04</span>
-        <h3>Поддерживать</h3>
-        <p>Аналитика, автоматизация и развитие после запуска</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-block section-rule" id="work">
-    <div class="section-heading">
-      <span class="section-label">Проекты</span>
-    </div>
-    <div class="project-grid">
-      {
-        projects.map((project, index) => (
-          <a class="project-card" href={`/projects/${project.data.slug}/`}>
-            <div class="project-card__image" data-background="blurred-cover">
-              {project.data.cover ? (
-                <>
-                  <Image
-                    src={project.data.cover}
-                    alt=""
-                    aria-hidden="true"
-                    class="project-card__backdrop"
-                    quality={70}
-                  />
-                  <Image
-                    src={project.data.cover}
-                    alt=""
-                    class="project-card__media"
-                    quality={88}
-                  />
-                </>
-              ) : (
-                <span class="project-card__fallback">
-                  SHCH–{String(index + 1).padStart(2, "0")}
-                </span>
-              )}
-            </div>
-            <div class="project-card__meta">
-              <span>{String(index + 1).padStart(2, "0")}</span>
+      <div class="legacy-project-list">
+        {
+          preparedProjects.map(({ project, preview }) => (
+            <a
+              class="legacy-project-row"
+              href={`/projects/${project.data.slug}/`}
+              data-project-preview
+              data-image={preview?.src}
+              data-title={project.data.title}
+              data-credits={project.data.credits || ""}
+            >
+              <span>{project.data.title}</span>
               <span>{project.data.year}</span>
-              <span>{project.data.object || "Digital product"}</span>
-            </div>
-            <h3>{project.data.title}</h3>
-            <IconArrow class="project-card__arrow" />
-          </a>
-        ))
-      }
+              <span>{project.data.object}</span>
+            </a>
+          ))
+        }
+      </div>
+      <nav class="legacy-secondary-nav" aria-label="Дополнительные разделы">
+        <a href="/notes/">ЗАПИСИ →</a>
+        <a href="/shop/">МАГАЗИН →</a>
+      </nav>
     </div>
-  </section>
 
-  <section class="section-block section-rule home-journal">
-    <div class="section-heading">
-      <span class="section-label">Блокнот</span>
-      <h2>
-        Процессы,<br />
-        наблюдения, архив
-      </h2>
-    </div>
-    <div class="journal-list">
-      {
-        notes.map((note, index) => (
-          <a class="journal-row" href={`/notes/${note.data.slug}/`}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <h3>{note.data.title}</h3>
-            <p>{excerpt(note.body, 150)}</p>
-            <span>
-              Читать <IconArrow />
-            </span>
-          </a>
-        ))
-      }
-    </div>
-    <a class="button-link" href="/notes/">
-      Все записи <IconArrow direction="right" />
-    </a>
-  </section>
-
-  <section class="shop-callout">
-    <div>
-      <span class="section-label section-label--dark">Магазин</span>
-      <h2>
-        Инструменты,<br />
-        издания и объекты
-      </h2>
-    </div>
-    <div>
-      <p>Инструменты, издания и небольшие тиражи SHCH</p>
-      <a class="button-link button-link--dark" href="/shop/">
-        В магазин <IconArrow direction="right" />
-      </a>
-    </div>
+    <aside class="legacy-panel legacy-preview" aria-live="polite">
+      <div class="legacy-preview__media">
+        {
+          initialProject?.preview && (
+            <img
+              src={initialProject.preview.src}
+              alt=""
+              data-preview-image
+              width={initialProject.preview.attributes.width}
+              height={initialProject.preview.attributes.height}
+            />
+          )
+        }
+      </div>
+      <p class="legacy-preview__caption" data-preview-caption>
+        {
+          initialProject?.project.data.credits
+            ? `Фото: ${initialProject.project.data.title} — ${initialProject.project.data.credits}`
+            : ""
+        }
+      </p>
+    </aside>
   </section>
 </BaseLayout>
+
+<script>
+  const rows = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-project-preview]"),
+  )
+  const image = document.querySelector<HTMLImageElement>("[data-preview-image]")
+  const caption = document.querySelector<HTMLElement>("[data-preview-caption]")
+  let delay: number | undefined
+
+  const showProject = (row: HTMLElement) => {
+    const source = row.dataset.image
+    if (!image || !source) return
+
+    image.src = source
+    image.alt = ""
+    if (caption) {
+      const credits = row.dataset.credits
+      caption.textContent = credits
+        ? `Фото: ${row.dataset.title} — ${credits}`
+        : ""
+    }
+  }
+
+  const scheduleProject = (row: HTMLElement) => {
+    window.clearTimeout(delay)
+    delay = window.setTimeout(() => showProject(row), 250)
+  }
+
+  rows.forEach(row => {
+    row.addEventListener("mouseenter", () => scheduleProject(row))
+    row.addEventListener("focus", () => scheduleProject(row))
+  })
+
+  if (rows.length > 1) {
+    showProject(rows[Math.floor(Math.random() * rows.length)])
+  }
+</script>

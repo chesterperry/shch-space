@@ -1,7 +1,6 @@
 ---
 import Header from "../components/Header.astro"
-import IconArrow from "../components/IconArrow.astro"
-import LogoIntro from "../components/LogoIntro.astro"
+import shchIcon from "../images/shch-ico.png"
 import "../styles/global.css"
 
 interface Props {
@@ -13,14 +12,13 @@ interface Props {
 
 const {
   canonicalPath = Astro.url.pathname,
-  description = "Исследования, разработка и запуск цифровых продуктов для коммерции и операционной работы",
+  description = "Продуктовая студия SHCH — онлайн-магазины и веб-сервисы",
   lang = "ru",
   title,
 } = Astro.props
 
-const siteTitle = title.includes("SHCH") ? title : `${title} – SHCH`
+const siteTitle = title.includes("SHCH") ? title : `${title} | SHCH`
 const canonicalUrl = new URL(canonicalPath, Astro.site)
-const currentYear = new Date().getFullYear()
 ---
 
 <!doctype html>
@@ -31,8 +29,14 @@ const currentYear = new Date().getFullYear()
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="icon" href="/shch-logo.svg" type="image/svg+xml" />
+    <link rel="icon" href={shchIcon.src} type="image/png" />
     <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://mc.yandex.ru" />
@@ -92,32 +96,10 @@ const currentYear = new Date().getFullYear()
     </script>
   </head>
   <body>
-    <div class="site-shell">
-      <LogoIntro />
-      <Header />
-      <main>
-        <slot />
-      </main>
-      <footer class="site-footer">
-        <div class="site-footer__top">
-          <span class="section-label section-label--inverse">Контакт</span>
-          <div class="site-footer__contact">
-            <p>Есть задача, идея или повод познакомиться?</p>
-            <a href="mailto:goto@shch.one">
-              goto@shch.one <IconArrow />
-            </a>
-          </div>
-        </div>
-        <div class="site-footer__meta">
-          <span>SHCH / Digital products</span>
-          <a href="https://t.me/olegscherbinin">
-            Telegram <IconArrow />
-          </a>
-          <span>Москва / По всему миру</span>
-          <span>© SHCH {currentYear}</span>
-        </div>
-      </footer>
-    </div>
+    <Header />
+    <main class="site-main">
+      <slot />
+    </main>
     <noscript>
       <div>
         <img

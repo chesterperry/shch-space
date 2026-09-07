@@ -2,8 +2,8 @@
   "name": "oleg-scherbinin-space",
   "short_name": "shch-space",
   "start_url": "/",
-  "background_color": "#f2f0e8",
-  "theme_color": "#11110f",
+  "background_color": "#ffffff",
+  "theme_color": "#f97316",
   "display": "minimal-ui",
   "icons": [
     {

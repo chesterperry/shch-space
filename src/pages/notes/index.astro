@@ -10,32 +10,58 @@ const notes = (await getCollection("site"))
       isPublished(entry) && isRussian(entry) && entry.data.type === "note",
   )
   .sort(byOrder)
+
+const initialNote = notes[0]
 ---
 
 <BaseLayout
-  title="Блокнот"
-  description="Записи SHCH об исследованиях, технологиях и работе"
+  title="Записи"
+  description="Несколько записей SHCH на разные и близкие темы"
 >
-  <header class="page-intro page-intro--compact">
-    <h1>Блокнот</h1>
-    <div class="page-intro__copy">
-      <p>Записи об исследованиях, технологиях и работе</p>
-      <p>Нерегулярно, от первого лица</p>
+  <section class="legacy-split legacy-list-page">
+    <div class="legacy-panel legacy-list-page__main">
+      <header class="legacy-page-title">
+        <a class="legacy-back" href="/">INDEX ←</a>
+        <h1>ЗАПИСИ</h1>
+      </header>
+      <p class="legacy-intro">
+        Несколько записей на разные и близкие мне темы.
+      </p>
+      <div class="legacy-note-list">
+        {
+          notes.map(note => (
+            <a
+              class="legacy-note-row"
+              href={`/notes/${note.data.slug}/`}
+              data-note-preview
+              data-title={note.data.title}
+              data-excerpt={excerpt(note.body, 260)}
+            >
+              {note.data.title}
+            </a>
+          ))
+        }
+      </div>
     </div>
-  </header>
-
-  <section class="notes-grid" aria-label="Записи блокнота">
-    {
-      notes.map((note, index) => (
-        <a class="note-card" href={`/notes/${note.data.slug}/`}>
-          <span class="note-card__number">
-            {String(index + 1).padStart(2, "0")} /{" "}
-            {String(notes.length).padStart(2, "0")}
-          </span>
-          <h2>{note.data.title}</h2>
-          <p class="note-card__excerpt">{excerpt(note.body, 180)}</p>
-        </a>
-      ))
-    }
+    <aside class="legacy-panel legacy-note-preview" aria-live="polite">
+      <h2 data-note-title>{initialNote?.data.title}</h2>
+      <p data-note-excerpt>{initialNote && excerpt(initialNote.body, 260)}</p>
+    </aside>
   </section>
 </BaseLayout>
+
+<script>
+  const title = document.querySelector<HTMLElement>("[data-note-title]")
+  const excerpt = document.querySelector<HTMLElement>("[data-note-excerpt]")
+  const rows = document.querySelectorAll<HTMLElement>("[data-note-preview]")
+
+  const showNote = (row: HTMLElement) => {
+    if (title) title.textContent = row.dataset.title || ""
+    if (excerpt) excerpt.textContent = row.dataset.excerpt || ""
+  }
+
+  rows.forEach(row => {
+    row.addEventListener("mouseenter", () => showNote(row))
+    row.addEventListener("focus", () => showNote(row))
+  })
+</script>

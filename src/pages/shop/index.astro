@@ -1,31 +1,22 @@
 ---
-import IconArrow from "../../components/IconArrow.astro"
 import BaseLayout from "../../layouts/BaseLayout.astro"
 
 const items = [
   {
     code: "SHCH–D01",
-    type: "Digital edition",
     title: "Полевые заметки об онлайн-ритейле",
-    description:
-      "Практическое издание о запуске и развитии магазина – готовится к выпуску",
-    mark: "PDF",
+    description: "Цифровое издание — готовится к выпуску",
   },
   {
     code: "SHCH–T01",
-    type: "Tool",
     title: "Набор инструментов для продуктовой команды",
     description:
-      "Шаблоны для исследований, метрик и продуктовых решений – в разработке",
-    mark: "KIT",
+      "Шаблоны для исследований и продуктовых решений — в разработке",
   },
   {
     code: "SHCH–O01",
-    type: "Small edition",
     title: "Объекты SHCH",
-    description:
-      "Печатные и рабочие вещи небольшими тиражами – первый выпуск скоро",
-    mark: "OBJ",
+    description: "Печатные и рабочие вещи небольшими тиражами — скоро",
   },
 ]
 ---
@@ -34,37 +25,34 @@ const items = [
   title="Магазин"
   description="Собственные инструменты, цифровые издания и небольшие тиражи SHCH"
 >
-  <header class="page-intro page-intro--compact">
-    <h1>Магазин</h1>
-    <div class="page-intro__copy">
-      <p>Собственные инструменты, цифровые издания и небольшие тиражи</p>
-      <p>Первый выпуск готовится</p>
+  <section class="legacy-split legacy-list-page legacy-shop-page">
+    <div class="legacy-panel legacy-list-page__main">
+      <header class="legacy-page-title">
+        <a class="legacy-back" href="/">INDEX ←</a>
+        <h1>МАГАЗИН</h1>
+      </header>
+      <p class="legacy-intro">
+        Собственные инструменты, цифровые издания и небольшие тиражи.
+      </p>
+      <div class="legacy-shop-list">
+        {
+          items.map(item => (
+            <article class="legacy-shop-row">
+              <span>{item.code}</span>
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
     </div>
-  </header>
-
-  <section class="shop-grid" aria-label="Будущие товары">
-    {
-      items.map(item => (
-        <article class="shop-item">
-          <div class="shop-item__visual">{item.mark}</div>
-          <div class="shop-item__meta">
-            <span>{item.code}</span>
-            <span>{item.type}</span>
-          </div>
-          <h2>{item.title}</h2>
-          <p>{item.description}</p>
-        </article>
-      ))
-    }
-  </section>
-
-  <section class="section-block">
-    <div class="section-heading">
-      <span class="section-index">Узнать о запуске</span>
-      <h2>Первым делом – в почту</h2>
-    </div>
-    <a class="button-link" href="mailto:goto@shch.one?subject=SHCH%20Shop">
-      Написать о магазине <IconArrow direction="right" />
-    </a>
+    <aside class="legacy-panel legacy-shop-contact">
+      <p>Первый выпуск готовится.</p>
+      <p>
+        <a href="mailto:goto@shch.one?subject=SHCH%20Shop">
+          Написать о магазине →
+        </a>
+      </p>
+    </aside>
   </section>
 </BaseLayout>

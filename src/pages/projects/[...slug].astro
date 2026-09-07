@@ -2,27 +2,35 @@
 import { Image } from "astro:assets"
 import { getCollection, render } from "astro:content"
 
-import IconArrow from "../../components/IconArrow.astro"
 import BaseLayout from "../../layouts/BaseLayout.astro"
-import { isPublished, isRussian } from "../../lib/content"
+import { byOrder, isPublished, isRussian } from "../../lib/content"
 
 export async function getStaticPaths() {
-  const projects = (await getCollection("site")).filter(
-    entry =>
-      isPublished(entry) && isRussian(entry) && entry.data.type === "project",
-  )
+  const projects = (await getCollection("site"))
+    .filter(
+      entry =>
+        isPublished(entry) && isRussian(entry) && entry.data.type === "project",
+    )
+    .sort(byOrder)
 
-  return projects.flatMap(entry =>
+  return projects.flatMap((entry, index) =>
     [entry.data.slug, ...entry.data.aliases].map(slug => ({
       params: { slug },
-      props: { entry },
+      props: {
+        entry,
+        previous: index > 0 ? projects[index - 1] : undefined,
+        next: index < projects.length - 1 ? projects[index + 1] : undefined,
+      },
     })),
   )
 }
 
-const { entry } = Astro.props
+const { entry, previous, next } = Astro.props
 const { Content } = await render(entry)
 const project = entry.data
+const externalLabel = project.externalUrl
+  ? new URL(project.externalUrl).hostname.replace(/^www\./, "")
+  : undefined
 ---
 
 <BaseLayout
@@ -31,88 +39,123 @@ const project = entry.data
   canonicalPath={`/projects/${project.slug}/`}
   lang={project.locale}
 >
-  <header class="project-hero">
-    <div>
-      <a class="section-index" href="/#work">
-        <IconArrow direction="left" /> К проектам
-      </a>
-    </div>
-    <h1>{project.title}</h1>
-  </header>
+  <section class="legacy-split legacy-project-page">
+    <article class="legacy-panel legacy-project-page__main">
+      <header class="legacy-page-title legacy-project-page__title">
+        <a class="legacy-back" href="/#projects">INDEX ←</a>
+        <h1>{project.title}</h1>
+      </header>
 
-  <section
-    class="project-facts project-facts--extended"
-    aria-label="Информация о проекте"
-  >
-    {
-      project.year && (
-        <div class="project-fact">
-          <span>Период</span>
-          <p>{project.year}</p>
-        </div>
-      )
-    }
-    {
-      project.role && (
-        <div class="project-fact">
-          <span>Роль</span>
-          <p>{project.role}</p>
-        </div>
-      )
-    }
-    {
-      project.object && (
-        <div class="project-fact">
-          <span>Тип</span>
-          <p>{project.object}</p>
-        </div>
-      )
-    }
-    {
-      project.externalUrl && (
-        <div class="project-fact">
-          <span>Ссылка</span>
-          <p>
-            <a class="project-fact__link" href={project.externalUrl}>
-              Открыть проект <IconArrow />
-            </a>
-          </p>
-        </div>
-      )
-    }
-    {
-      project.stack.length > 0 && (
-        <div class="project-fact project-fact--compact">
-          <span>Стек</span>
-          <p>{project.stack.join(" / ")}</p>
-        </div>
-      )
-    }
-  </section>
+      <div class="legacy-facts" aria-label="Информация о проекте">
+        {
+          project.year && (
+            <div class="legacy-fact">
+              <h2>ПЕРИОД</h2>
+              <hr />
+              <p>{project.year}</p>
+            </div>
+          )
+        }
+        {
+          project.role && (
+            <div class="legacy-fact">
+              <h2>РОЛЬ</h2>
+              <hr />
+              <p>{project.role}</p>
+            </div>
+          )
+        }
+        {
+          project.object && (
+            <div class="legacy-fact">
+              <h2>ТИП</h2>
+              <hr />
+              <p>{project.object}</p>
+            </div>
+          )
+        }
+        {
+          project.externalUrl && (
+            <div class="legacy-fact">
+              <h2>ССЫЛКА ↗</h2>
+              <hr />
+              <p>
+                <a href={project.externalUrl}>{externalLabel}</a>
+              </p>
+            </div>
+          )
+        }
+        {
+          project.stack.length > 0 && (
+            <div class="legacy-fact legacy-fact--wide">
+              <h2>СТЕК</h2>
+              <hr />
+              <p>{project.stack.join(" / ")}</p>
+            </div>
+          )
+        }
+      </div>
 
-  {
-    project.cover && (
-      <section class="project-gallery project-cover">
-        <Image
-          src={project.cover}
-          alt=""
-          class="content-cover-image"
-          quality={90}
-        />
-        {project.credits && (
-          <p class="project-cover__credit">
-            <span>Кредиты</span>
-            {project.credits}
-          </p>
-        )}
+      {
+        project.cover && (
+          <figure class="legacy-project-mobile-media">
+            <Image src={project.cover} alt="" quality={90} />
+            {project.credits && <figcaption>{project.credits}</figcaption>}
+          </figure>
+        )
+      }
+
+      <section class="legacy-project-comment">
+        <h2>КОММЕНТАРИЙ</h2>
+        <hr />
+        <div class="legacy-richtext">
+          <Content />
+        </div>
       </section>
-    )
-  }
 
-  <article class="article-layout project-post">
-    <span class="section-index">Проект / {project.year}</span>
-    <div class="article-body">
-      <Content />
-    </div>
-  </article>
+      <nav class="legacy-mobile-pagination" aria-label="Другие проекты">
+        {
+          previous ? (
+            <a href={`/projects/${previous.data.slug}/`}>← ПРЕДЫДУЩИЙ</a>
+          ) : (
+            <span />
+          )
+        }
+        {next && <a href={`/projects/${next.data.slug}/`}>СЛЕДУЮЩИЙ →</a>}
+      </nav>
+    </article>
+
+    <aside class="legacy-panel legacy-project-page__media">
+      <nav class="legacy-project-pagination" aria-label="Другие проекты">
+        <span>
+          {
+            previous && (
+              <a href={`/projects/${previous.data.slug}/`}>
+                ← {previous.data.title}
+              </a>
+            )
+          }
+        </span>
+        <span>
+          {
+            next && (
+              <a href={`/projects/${next.data.slug}/`}>{next.data.title} →</a>
+            )
+          }
+        </span>
+      </nav>
+      {
+        project.cover && (
+          <figure class="legacy-project-cover">
+            <Image src={project.cover} alt="" quality={90} />
+            {project.credits && (
+              <figcaption>
+                Фото: {project.title} — {project.credits}
+              </figcaption>
+            )}
+          </figure>
+        )
+      }
+    </aside>
+  </section>
 </BaseLayout>

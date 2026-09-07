@@ -1,58 +1,9 @@
 ---
-import shchLogo from "../images/shch-logo.svg?url"
-import IconArrow from "./IconArrow.astro"
-
-const navigation = [
-  { to: "/#work", label: "Проекты" },
-  { to: "/notes/", label: "Блокнот" },
-  { to: "/shop/", label: "Магазин" },
-]
-
-const pathname = Astro.url.pathname
-const isActive = (to: string) =>
-  to === "/#work" ? pathname === "/" : pathname.startsWith(to)
+const currentYear = new Date().getFullYear()
 ---
 
-<header class="site-header">
-  <div class="site-header__primary">
-    <a href="/" class="site-mark" aria-label="SHCH – главная" data-site-mark>
-      <img src={shchLogo} alt="SHCH" />
-    </a>
-    <nav class="site-nav" aria-label="Основная навигация">
-      {
-        navigation.map(item => (
-          <a
-            href={item.to}
-            class:list={[
-              "site-nav__link",
-              { "site-nav__link--active": isActive(item.to) },
-            ]}
-            aria-current={isActive(item.to) ? "page" : undefined}
-          >
-            {item.label}
-          </a>
-        ))
-      }
-    </nav>
-  </div>
-
-  <div class="site-header__descriptor">
-    <p>
-      Исследования<br />
-      Разработка<br />
-      Цифровые продукты
-    </p>
-  </div>
-
-  <div class="site-header__contact">
-    <p>
-      Москва<br />
-      Работаем по всему миру
-    </p>
-    <a class="site-contact" href="mailto:goto@shch.one">
-      <span class="site-contact__desktop">Обсудить проект</span>
-      <span class="site-contact__mobile">Написать</span>
-      <IconArrow />
-    </a>
-  </div>
+<header class="legacy-header">
+  <a href="/" aria-label="Студия SHCH — главная">
+    Студия SHCH © {currentYear}
+  </a>
 </header>
