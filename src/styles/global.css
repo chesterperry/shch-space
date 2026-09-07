@@ -197,7 +197,7 @@ code {
 }
 
 .legacy-projects {
-  min-height: 100vh;
+  min-height: 0;
 }
 
 .legacy-title-block--projects {
@@ -243,7 +243,7 @@ code {
 
 .legacy-preview {
   display: grid;
-  min-height: 42rem;
+  min-height: 0;
   grid-template-rows: 7.5rem minmax(0, 27.5rem) auto;
 }
 
@@ -301,10 +301,6 @@ code {
   .legacy-about .legacy-title-block {
     height: auto;
     padding-top: 3rem;
-  }
-
-  .legacy-projects {
-    min-height: 0;
   }
 
   .legacy-title-block--projects {
