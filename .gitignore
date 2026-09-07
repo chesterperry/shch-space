@@ -53,10 +53,15 @@ typings/
 
 # dotenv environment variable files
 .env*
+!.env.example
 
-# gatsby files
+# Legacy Gatsby output kept ignored during migration
 .cache/
 public
+
+# Astro files
+.astro/
+dist/
 
 # Mac files
 .DS_Store

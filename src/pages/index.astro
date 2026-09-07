@@ -1,0 +1,162 @@
+---
+import { Image } from "astro:assets"
+import { getCollection } from "astro:content"
+
+import About from "../components/About.astro"
+import IconArrow from "../components/IconArrow.astro"
+import BaseLayout from "../layouts/BaseLayout.astro"
+import { byOrder, excerpt, isPublished, isRussian } from "../lib/content"
+
+const entries = await getCollection("site")
+const published = entries.filter(
+  entry => isPublished(entry) && isRussian(entry),
+)
+const projects = published
+  .filter(entry => entry.data.type === "project")
+  .sort(byOrder)
+const notes = published
+  .filter(entry => entry.data.type === "note")
+  .sort(byOrder)
+  .slice(0, 3)
+---
+
+<BaseLayout title="SHCH – цифровые продукты">
+  <section class="hero">
+    <div class="hero__heading">
+      <h1>
+        Продукты,<br />
+        сервисы<br />
+        и системы
+      </h1>
+    </div>
+    <div class="hero__footer">
+      <p>
+        Исследования, разработка и запуск цифровых продуктов для коммерции и
+        операционной работы
+      </p>
+      <a class="hero__link" href="/#work">
+        К проектам <IconArrow direction="down" />
+      </a>
+    </div>
+  </section>
+
+  <section class="section-block section-rule" id="approach">
+    <div class="section-heading">
+      <span class="section-label">Подход</span>
+      <h2>
+        От исследования<br />
+        до запуска
+      </h2>
+    </div>
+    <About />
+    <div class="service-grid">
+      <div>
+        <span>01</span>
+        <h3>Исследовать</h3>
+        <p>Контекст, пользователи, ограничения и гипотезы</p>
+      </div>
+      <div>
+        <span>02</span>
+        <h3>Спроектировать</h3>
+        <p>Структура, сценарии и интерфейсы</p>
+      </div>
+      <div>
+        <span>03</span>
+        <h3>Собрать</h3>
+        <p>Сервисы, платформы и внутренние системы</p>
+      </div>
+      <div>
+        <span>04</span>
+        <h3>Поддерживать</h3>
+        <p>Аналитика, автоматизация и развитие после запуска</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block section-rule" id="work">
+    <div class="section-heading">
+      <span class="section-label">Проекты</span>
+    </div>
+    <div class="project-grid">
+      {
+        projects.map((project, index) => (
+          <a class="project-card" href={`/projects/${project.data.slug}/`}>
+            <div class="project-card__image" data-background="blurred-cover">
+              {project.data.cover ? (
+                <>
+                  <Image
+                    src={project.data.cover}
+                    alt=""
+                    aria-hidden="true"
+                    class="project-card__backdrop"
+                    quality={70}
+                  />
+                  <Image
+                    src={project.data.cover}
+                    alt=""
+                    class="project-card__media"
+                    quality={88}
+                  />
+                </>
+              ) : (
+                <span class="project-card__fallback">
+                  SHCH–{String(index + 1).padStart(2, "0")}
+                </span>
+              )}
+            </div>
+            <div class="project-card__meta">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <span>{project.data.year}</span>
+              <span>{project.data.object || "Digital product"}</span>
+            </div>
+            <h3>{project.data.title}</h3>
+            <IconArrow class="project-card__arrow" />
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-block section-rule home-journal">
+    <div class="section-heading">
+      <span class="section-label">Блокнот</span>
+      <h2>
+        Процессы,<br />
+        наблюдения, архив
+      </h2>
+    </div>
+    <div class="journal-list">
+      {
+        notes.map((note, index) => (
+          <a class="journal-row" href={`/notes/${note.data.slug}/`}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{note.data.title}</h3>
+            <p>{excerpt(note.body, 150)}</p>
+            <span>
+              Читать <IconArrow />
+            </span>
+          </a>
+        ))
+      }
+    </div>
+    <a class="button-link" href="/notes/">
+      Все записи <IconArrow direction="right" />
+    </a>
+  </section>
+
+  <section class="shop-callout">
+    <div>
+      <span class="section-label section-label--dark">Магазин</span>
+      <h2>
+        Инструменты,<br />
+        издания и объекты
+      </h2>
+    </div>
+    <div>
+      <p>Инструменты, издания и небольшие тиражи SHCH</p>
+      <a class="button-link button-link--dark" href="/shop/">
+        В магазин <IconArrow direction="right" />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

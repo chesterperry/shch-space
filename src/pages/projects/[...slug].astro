@@ -1,0 +1,118 @@
+---
+import { Image } from "astro:assets"
+import { getCollection, render } from "astro:content"
+
+import IconArrow from "../../components/IconArrow.astro"
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import { isPublished, isRussian } from "../../lib/content"
+
+export async function getStaticPaths() {
+  const projects = (await getCollection("site")).filter(
+    entry =>
+      isPublished(entry) && isRussian(entry) && entry.data.type === "project",
+  )
+
+  return projects.flatMap(entry =>
+    [entry.data.slug, ...entry.data.aliases].map(slug => ({
+      params: { slug },
+      props: { entry },
+    })),
+  )
+}
+
+const { entry } = Astro.props
+const { Content } = await render(entry)
+const project = entry.data
+---
+
+<BaseLayout
+  title={project.title}
+  description={project.summary}
+  canonicalPath={`/projects/${project.slug}/`}
+  lang={project.locale}
+>
+  <header class="project-hero">
+    <div>
+      <a class="section-index" href="/#work">
+        <IconArrow direction="left" /> К проектам
+      </a>
+    </div>
+    <h1>{project.title}</h1>
+  </header>
+
+  <section
+    class="project-facts project-facts--extended"
+    aria-label="Информация о проекте"
+  >
+    {
+      project.year && (
+        <div class="project-fact">
+          <span>Период</span>
+          <p>{project.year}</p>
+        </div>
+      )
+    }
+    {
+      project.role && (
+        <div class="project-fact">
+          <span>Роль</span>
+          <p>{project.role}</p>
+        </div>
+      )
+    }
+    {
+      project.object && (
+        <div class="project-fact">
+          <span>Тип</span>
+          <p>{project.object}</p>
+        </div>
+      )
+    }
+    {
+      project.externalUrl && (
+        <div class="project-fact">
+          <span>Ссылка</span>
+          <p>
+            <a class="project-fact__link" href={project.externalUrl}>
+              Открыть проект <IconArrow />
+            </a>
+          </p>
+        </div>
+      )
+    }
+    {
+      project.stack.length > 0 && (
+        <div class="project-fact project-fact--compact">
+          <span>Стек</span>
+          <p>{project.stack.join(" / ")}</p>
+        </div>
+      )
+    }
+  </section>
+
+  {
+    project.cover && (
+      <section class="project-gallery project-cover">
+        <Image
+          src={project.cover}
+          alt=""
+          class="content-cover-image"
+          quality={90}
+        />
+        {project.credits && (
+          <p class="project-cover__credit">
+            <span>Кредиты</span>
+            {project.credits}
+          </p>
+        )}
+      </section>
+    )
+  }
+
+  <article class="article-layout project-post">
+    <span class="section-index">Проект / {project.year}</span>
+    <div class="article-body">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content"
+
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import { byOrder, excerpt, isPublished, isRussian } from "../../lib/content"
+
+const notes = (await getCollection("site"))
+  .filter(
+    entry =>
+      isPublished(entry) && isRussian(entry) && entry.data.type === "note",
+  )
+  .sort(byOrder)
+---
+
+<BaseLayout
+  title="Блокнот"
+  description="Записи SHCH об исследованиях, технологиях и работе"
+>
+  <header class="page-intro page-intro--compact">
+    <h1>Блокнот</h1>
+    <div class="page-intro__copy">
+      <p>Записи об исследованиях, технологиях и работе</p>
+      <p>Нерегулярно, от первого лица</p>
+    </div>
+  </header>
+
+  <section class="notes-grid" aria-label="Записи блокнота">
+    {
+      notes.map((note, index) => (
+        <a class="note-card" href={`/notes/${note.data.slug}/`}>
+          <span class="note-card__number">
+            {String(index + 1).padStart(2, "0")} /{" "}
+            {String(notes.length).padStart(2, "0")}
+          </span>
+          <h2>{note.data.title}</h2>
+          <p class="note-card__excerpt">{excerpt(note.body, 180)}</p>
+        </a>
+      ))
+    }
+  </section>
+</BaseLayout>

@@ -1,47 +1,42 @@
 {
   "name": "oleg-space",
   "private": true,
-  "description": "",
+  "description": "Static SHCH portfolio, projects and notebook built with Astro",
   "version": "0.1.0",
   "author": "Oleg Scherbinin <oleg.shch@gmail.com>",
+  "packageManager": "pnpm@10.28.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "dependencies": {
-    "@mdx-js/react": "^2.2.1",
-    "gatsby": "^5.5.0",
-    "gatsby-plugin-google-gtag": "^5.11.0",
-    "gatsby-plugin-image": "^3.5.0",
-    "gatsby-plugin-manifest": "^5.5.0",
-    "gatsby-plugin-mdx": "^5.5.0",
-    "gatsby-plugin-sharp": "^5.5.0",
-    "gatsby-plugin-yandex-metrika": "^2.5.0",
-    "gatsby-remark-images": "^7.8.0",
-    "gatsby-source-filesystem": "^5.5.0",
-    "gatsby-source-google-spreadsheets": "^3.0.8",
-    "gatsby-transformer-sharp": "^5.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-markdown": "^10.1.0",
-    "sharp": "^0.34.5"
+    "@astrojs/mdx": "^8.0.0",
+    "astro": "^7.3.1",
+    "sharp": "^0.35.4"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "autoprefixer": "^10.4.13",
-    "gatsby-plugin-postcss": "^6.5.0",
     "postcss": "^8.4.21",
-    "prettier": "^2.8.3",
-    "tailwindcss": "^3.2.4"
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^0.14.1",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^6.0.3"
   },
   "keywords": [
-    "gatsby"
+    "astro"
   ],
   "license": "0BSD",
   "scripts": {
-    "build": "gatsby build",
-    "deploy": "gatsby build && cd ./public && s3cmd --recursive put ./ s3://shch.one/ ",
-    "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
-    "start": "gatsby develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "build": "astro build",
+    "check": "astro check",
+    "content:sync": "node scripts/sync-content.mjs",
+    "dev": "astro dev",
+    "develop": "astro dev",
+    "format": "prettier --write \"**/*.{astro,js,jsx,ts,tsx,json,md,mdx,css}\"",
+    "preview": "astro preview",
+    "release:prepare": "pnpm content:sync && pnpm check && pnpm build",
+    "start": "astro dev",
+    "test": "astro check"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

@@ -1,17 +1,81 @@
-# Oleg Space
-Using Tailwind as CSS module and Gatsby as static generator.
-## Part 1
-Make drafts of all pages, link the data source and try to using it.
-New drafts:
-- Projects list page,
-- Project overview page.
+# SHCH Space
 
-Remove all not used css files.
-Rewrite new global styles with Tailwind 
+Статический сайт [shch.one](https://shch.one): портфолио, проекты, блокнот и
+заглушка магазина. Сайт работает на Astro 7 и собирает Markdown/MDX из отдельной
+папки Obsidian.
 
-## Part 2 
+## Локальный запуск
 
-Prepare blog section
-Replace index with projects
+Требуются Node.js 22.12+ и pnpm.
 
-- add Garage Work
+```bash
+cp .env.example .env.local
+# Укажите в .env.local абсолютный путь к папке контента shch-space.
+pnpm install
+pnpm dev
+```
+
+Основные проверки:
+
+```bash
+pnpm check
+pnpm build
+pnpm preview
+```
+
+Результат статической сборки появляется в `dist/`.
+
+## Контент
+
+Для локальной работы путь к Obsidian задаётся переменной `OBSIDIAN_VAULT_PATH`.
+Astro загружает все `*.md` и `*.mdx` внутри этой папки. Если переменная не задана,
+используется версионируемый снимок `content/`, из которого сайт собирается в CI.
+Схема frontmatter определена в `src/content.config.ts`.
+
+Обязательные поля:
+
+```yaml
+title: Название
+summary: Краткое описание
+slug: url-slug
+type: note # note | project
+status: published # draft | published | archived
+```
+
+Для переводов предусмотрены `locale: ru|en` и общий `translationKey`. Русский —
+язык по умолчанию и сохраняет существующие URL без префикса. Английские маршруты
+следует добавлять вместе с первым согласованным переводом, не создавая пустые или
+автоматически переведённые страницы.
+
+Изображения можно хранить рядом с Markdown и подключать относительными путями.
+Astro проверит и оптимизирует их при сборке.
+
+## Архитектура
+
+- `astro.config.mjs` — статическая сборка, MDX, локали и доступ к внешнему контенту;
+- `src/pages/` — файловые маршруты;
+- `src/layouts/BaseLayout.astro` — общий HTML, SEO и аналитика;
+- `src/components/` — серверные Astro-компоненты и точечные браузерные скрипты;
+- `src/styles/global.css` — визуальная система;
+- `static/` — публичные файлы без обработки.
+
+Для Three.js и сложной анимации создавайте отдельный компонент конкретной
+страницы и загружайте клиентский код только там. Общий UI остаётся без React и
+без глобального JavaScript-бандла; интеграцию UI-фреймворка стоит добавлять лишь
+для изолированного интерактивного острова, которому она действительно нужна.
+
+## Маршруты
+
+- `/` — главная и проекты;
+- `/notes/` и `/notes/<slug>/` — блокнот;
+- `/projects/<slug>/` — проект;
+- `/shop/` — магазин;
+- алиасы проектов создаются как отдельные статические страницы и получают
+  canonical на основной slug.
+
+## Публикация
+
+Перед релизом `pnpm release:prepare` обновляет снимок `content/`, проверяет и
+собирает сайт. Публичный сайт размещён в GitHub Pages. Workflow запускается
+вручную или коммитом в `master` с явным маркером `[deploy]`; обычные push не
+публикуют сайт. После релиза нужно отдельно проверить публичные URL.

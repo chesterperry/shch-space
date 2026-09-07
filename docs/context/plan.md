@@ -3,13 +3,16 @@
 ## Обзор проекта
 
 ### Цель
+
 Редизайн и реструктуризация сайта с добавлением:
+
 - Поддержки темной/светлой темы
 - Упрощенной главной страницы
 - Отдельной страницы проектов
 - Новой страницы "Практика" для привлечения студентов и разработчиков
 
 ### Ключевые изменения
+
 1. Система тем (dark/light mode)
 2. Новая структура главной страницы
 3. Вынос проектов на отдельную страницу
@@ -20,6 +23,7 @@
 ## 1. Система тем (Dark/Light Mode)
 
 ### Требования
+
 - Автоматическое определение настроек системы (`prefers-color-scheme`)
 - Возможность ручного переключения
 - Сохранение выбора пользователя (localStorage)
@@ -30,18 +34,20 @@
 #### 1.1 Tailwind Configuration
 
 ```javascript
-// tailwind.config.js
-module.exports = {
-  darkMode: 'class', // или 'media'
+// tailwind.config.mjs
+export default {
+  darkMode: "class", // или 'media'
   // ...
 }
 ```
 
-#### 1.2 Theme Provider Component
+#### 1.2 Управление темой
 
-Создать компонент для управления темой:
-- `src/components/theme.provider.js` - контекст и логика переключения
-- `src/components/theme.toggle.js` - кнопка переключения
+Создать Astro-компонент с кнопкой и небольшим нативным скриптом:
+
+- `src/components/ThemeToggle.astro` — кнопка и логика переключения;
+- состояние хранить в `localStorage`, исходное значение читать из
+  `prefers-color-scheme` до первого отображения страницы.
 
 #### 1.3 CSS Variables
 
@@ -69,9 +75,8 @@ module.exports = {
 
 #### 1.4 Задачи
 
-- [ ] Обновить `tailwind.config.js` с поддержкой dark mode
-- [ ] Создать `theme.provider.js`
-- [ ] Создать `theme.toggle.js`
+- [ ] Обновить `tailwind.config.mjs` с поддержкой dark mode
+- [ ] Создать `ThemeToggle.astro`
 - [ ] Добавить переключатель в Header
 - [ ] Обновить существующие компоненты с классами dark:
 - [ ] Протестировать все страницы в обеих темах
@@ -119,16 +124,17 @@ module.exports = {
 > Открыты к сотрудничеству — как с клиентами, так и со студентами и разработчиками, которым интересна практическая работа над реальным продуктом.
 
 **Контакты:**
+
 - Email: goto@shch.one
 - Telegram
 
 ### Компоненты
 
-- [ ] Создать `src/components/hero.js` - главный заголовок
-- [ ] Создать `src/components/about.main.js` - основной текст о команде
-- [ ] Создать `src/components/contact.links.js` - ссылки на контакты
-- [ ] Создать `src/components/main.nav.js` - навигация по разделам
-- [ ] Обновить `src/pages/index.js`
+- [ ] Создать `src/components/Hero.astro` — главный заголовок
+- [ ] Создать `src/components/AboutMain.astro` — основной текст о команде
+- [ ] Создать `src/components/ContactLinks.astro` — ссылки на контакты
+- [ ] Создать `src/components/MainNav.astro` — навигация по разделам
+- [ ] Обновить `src/pages/index.astro`
 
 ---
 
@@ -158,12 +164,12 @@ module.exports = {
 ### Изменения
 
 - Убрать отображение ролей (`roleCode`)
-- Перенести логику из `index.js` в новый файл
+- Перенести логику из `index.astro` в новый маршрут
 - Обновить фильтрацию данных
 
 ### Задачи
 
-- [ ] Создать `src/pages/projects.js`
+- [ ] Создать `src/pages/projects/index.astro`
 - [ ] Перенести компонент списка проектов
 - [ ] Убрать колонку с ролями
 - [ ] Обновить навигацию
@@ -224,16 +230,17 @@ module.exports = {
 **Текущий этап развития:**
 Объединение технологий для внедрения на проекты
 
-| Технология | Назначение |
-|------------|------------|
-| Medusa.js | e-commerce движок |
-| Strapi | система управления контентом |
-| Meilisearch | поисковый движок |
-| Gorse | рекомендательная система |
-| Ditto Feed | система взаимодействия с клиентом |
-| Next.js | фронтенд |
+| Технология  | Назначение                        |
+| ----------- | --------------------------------- |
+| Medusa.js   | e-commerce движок                 |
+| Strapi      | система управления контентом      |
+| Meilisearch | поисковый движок                  |
+| Gorse       | рекомендательная система          |
+| Ditto Feed  | система взаимодействия с клиентом |
+| Next.js     | фронтенд                          |
 
 **Следующий этап развития:**
+
 - LLM-интеграции
 - POS терминалы для ритейла
 
@@ -264,14 +271,14 @@ module.exports = {
 
 ### Задачи
 
-- [ ] Создать `src/pages/practice.js`
+- [ ] Создать `src/pages/practice.astro`
 - [ ] Создать компоненты секций:
-  - [ ] `src/components/practice/intro.js`
-  - [ ] `src/components/practice/about.js`
-  - [ ] `src/components/practice/stack.js`
-  - [ ] `src/components/practice/tasks.js`
-  - [ ] `src/components/practice/benefits.js`
-  - [ ] `src/components/practice/format.js`
+  - [ ] `src/components/practice/Intro.astro`
+  - [ ] `src/components/practice/About.astro`
+  - [ ] `src/components/practice/Stack.astro`
+  - [ ] `src/components/practice/Tasks.astro`
+  - [ ] `src/components/practice/Benefits.astro`
+  - [ ] `src/components/practice/Format.astro`
 - [ ] Стилизация с Tailwind
 - [ ] Добавить dark mode классы
 
@@ -284,48 +291,55 @@ module.exports = {
 ```
 src/
 ├── components/
-│   ├── theme/
-│   │   ├── provider.js      # Theme context provider
-│   │   └── toggle.js        # Theme toggle button
+│   ├── ThemeToggle.astro        # Theme toggle + native script
 │   ├── layout/
-│   │   ├── header.js        # Updated with theme toggle
-│   │   └── nav.js           # Main navigation
+│   │   ├── Header.astro     # Updated with theme toggle
+│   │   └── Nav.astro        # Main navigation
 │   ├── home/
-│   │   ├── hero.js          # Main headline
-│   │   ├── about.js         # About section
-│   │   └── contacts.js      # Contact links
+│   │   ├── Hero.astro       # Main headline
+│   │   ├── About.astro      # About section
+│   │   └── Contacts.astro   # Contact links
 │   ├── projects/
-│   │   ├── list.js          # Projects list
-│   │   └── preview.js       # Project preview
+│   │   ├── List.astro       # Projects list
+│   │   └── Preview.astro    # Project preview
 │   └── practice/
-│       ├── intro.js         # Introduction
-│       ├── about.js         # About project
-│       ├── stack.js         # Tech stack
-│       ├── tasks.js         # Tasks section
-│       ├── benefits.js      # Benefits section
-│       └── format.js        # Format section
+│       ├── Intro.astro      # Introduction
+│       ├── About.astro      # About project
+│       ├── Stack.astro      # Tech stack
+│       ├── Tasks.astro      # Tasks section
+│       ├── Benefits.astro   # Benefits section
+│       └── Format.astro     # Format section
+├── layouts/
+│   └── BaseLayout.astro          # Theme bootstrap and shared shell
 ├── pages/
-│   ├── index.js             # Updated homepage
-│   ├── projects.js          # Projects page
-│   └── practice.js          # Practice page
+│   ├── index.astro               # Updated homepage
+│   ├── projects/index.astro      # Projects page
+│   └── practice.astro            # Practice page
 └── styles/
     └── global.css           # Theme variables
 ```
 
-### 5.2 Gatsby Configuration
+### 5.2 Интеграция с Astro
 
-Обновить `gatsby-browser.js` и `gatsby-ssr.js` для поддержки theme provider:
+Подключить переменные темы и небольшой bootstrap-скрипт в `BaseLayout.astro`.
+Интерактивная кнопка остаётся изолированным Astro-компонентом; глобальный
+UI-runtime и theme provider не нужны.
 
-```javascript
-// gatsby-browser.js & gatsby-ssr.js
-export const wrapRootElement = ({ element }) => (
-  <ThemeProvider>{element}</ThemeProvider>
-)
+```astro
+<script is:inline>
+  const savedTheme = localStorage.getItem("theme")
+  const systemDark = matchMedia("(prefers-color-scheme: dark)").matches
+  document.documentElement.classList.toggle(
+    "dark",
+    savedTheme === "dark" || (!savedTheme && systemDark),
+  )
+</script>
 ```
 
 ### 5.3 Зависимости
 
 Возможно потребуется добавить:
+
 - Никаких новых зависимостей (используем нативные возможности)
 
 ---
@@ -340,7 +354,7 @@ export const wrapRootElement = ({ element }) => (
 
 ### Layout
 
-- Обновить с учетом theme provider
+- Подключить ранний theme bootstrap в `BaseLayout.astro`
 - Добавить dark mode стили
 
 ### Footer
@@ -357,23 +371,22 @@ export const wrapRootElement = ({ element }) => (
 
 ### Фаза 1: Подготовка и тема
 
-- [ ] Обновить `tailwind.config.js`
-- [ ] Создать `theme.provider.js`
-- [ ] Создать `theme.toggle.js`
+- [ ] Обновить `tailwind.config.mjs`
+- [ ] Создать `ThemeToggle.astro`
 - [ ] Обновить цветовую палитру
-- [ ] Интегрировать в `gatsby-browser.js` и `gatsby-ssr.js`
+- [ ] Интегрировать theme bootstrap в `BaseLayout.astro`
 
 ### Фаза 2: Главная страница
 
 - [ ] Создать компонент Hero
 - [ ] Создать компонент About (новый контент)
 - [ ] Создать компонент Contact Links
-- [ ] Обновить `index.js`
+- [ ] Обновить `index.astro`
 - [ ] Добавить навигацию на другие страницы
 
 ### Фаза 3: Страница Проекты
 
-- [ ] Создать `projects.js`
+- [ ] Создать `projects/index.astro`
 - [ ] Перенести логику списка проектов
 - [ ] Убрать отображение ролей
 - [ ] Добавить dark mode классы
@@ -381,7 +394,7 @@ export const wrapRootElement = ({ element }) => (
 
 ### Фаза 4: Страница Практика
 
-- [ ] Создать `practice.js`
+- [ ] Создать `practice.astro`
 - [ ] Создать компоненты секций
 - [ ] Стилизовать таблицу стека
 - [ ] Добавить контакты
@@ -416,15 +429,15 @@ export const wrapRootElement = ({ element }) => (
 
 ## 9. Сроки
 
-| Фаза | Оценка времени |
-|------|----------------|
-| Фаза 1: Тема | 2-3 часа |
-| Фаза 2: Главная | 2-3 часа |
-| Фаза 3: Проекты | 1-2 часа |
-| Фаза 4: Практика | 3-4 часа |
-| Фаза 5: Тестирование | 1-2 часа |
-| **Итого** | **9-14 часов** |
+| Фаза                 | Оценка времени |
+| -------------------- | -------------- |
+| Фаза 1: Тема         | 2-3 часа       |
+| Фаза 2: Главная      | 2-3 часа       |
+| Фаза 3: Проекты      | 1-2 часа       |
+| Фаза 4: Практика     | 3-4 часа       |
+| Фаза 5: Тестирование | 1-2 часа       |
+| **Итого**            | **9-14 часов** |
 
 ---
 
-*Документ создан на основе brief из docs/update.md*
+_Документ создан на основе brief из docs/update.md_

@@ -1,0 +1,19 @@
+---
+import IconArrow from "../components/IconArrow.astro"
+import BaseLayout from "../layouts/BaseLayout.astro"
+---
+
+<BaseLayout title="404">
+  <header class="page-intro">
+    <span class="section-index">Ошибка / 404</span>
+    <h1>Страница не найдена</h1>
+    <div class="page-intro__copy">
+      <p>Адрес изменился или такой страницы нет</p>
+      <p>
+        <a class="button-link" href="/">
+          Вернуться на главную <IconArrow direction="right" />
+        </a>
+      </p>
+    </div>
+  </header>
+</BaseLayout>
