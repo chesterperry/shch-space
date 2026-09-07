@@ -2,10 +2,9 @@
 
 - Проверено: 2026-09-07
 - Реализация: Astro 7 в рабочем дереве
-- Production: GitHub Pages, Astro release `7dfd8fbb9289b4eb2b0be34b3584b8b0d24be626`
+- Production: GitHub Pages, Astro release `b1b9b2c6e52be6a6f199005708545bb2247e4c48`
 - Runtime-проверка: 2026-09-07, 51 из 51 файлов совпали с локальным артефактом
 - Удалённая страница: `/notes/website-story/` возвращает `404`
-- Patch-кандидат: обновление транзитивных `picomatch` после post-release audit
 - Candidate artifact SHA-256: `527d6cf261a40cedd3a8fc1df642f2108897768b2375ecfa5bc4eb5d9926766b`
 - Rollback: `71fa6497998f852238ed08ae65b416408b751caa`
 
@@ -16,6 +15,7 @@
 - [x] `/notes/website-story/` отсутствует в `dist/`
 - [x] главная, `/notes/`, проекты и `/shop/` отвечают после публикации
 - [x] публичная страница `/notes/website-story/` возвращает `404`
+- [x] полный `pnpm audit`: известных уязвимостей нет
 
 ## Принятие
 

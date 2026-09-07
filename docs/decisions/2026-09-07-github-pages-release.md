@@ -37,4 +37,9 @@ commit и запустить workflow с явным deploy-маркером.
 - Alias `/projects/sword-moscow-2024/` сохранил canonical на
   `/projects/mech-moscow-2024/`.
 - Первый post-release audit обнаружил уязвимые транзитивные `picomatch@2.3.1` и
-  `picomatch@4.0.3`; для них подготовлен отдельный patch-release.
+  `picomatch@4.0.3`.
+- Patch-release `b1b9b2c6e52be6a6f199005708545bb2247e4c48` обновил Picomatch,
+  PostCSS, Autoprefixer, Browserslist и PostCSS Selector Parser.
+- После patch-release полный `pnpm audit` сообщает `No known vulnerabilities`.
+- Повторная runtime-проверка: 51 из 51 публичных файлов совпали с `dist/`,
+  удалённая страница по-прежнему отвечает `404`.
