@@ -2,8 +2,8 @@
 
 ## Scope
 
-This repository owns the static `shch.one` portfolio, project archive, notebook,
-and shop placeholder. The site runs on Astro and is published separately to S3.
+This repository owns the static `shch.one` portfolio and project archive. The
+site runs on Astro and is published through GitHub Pages.
 
 Do not infer that a successful local build is deployed. Do not run `pnpm deploy`,
 write to S3, commit, or push without explicit owner authorization.
@@ -29,16 +29,16 @@ integration only when the interaction requires one.
 
 ## Content and URLs
 
-Current Russian URLs are stable and must be preserved:
+Current public Russian URLs are:
 
 - `/`
-- `/notes/`
-- `/notes/<slug>/`
 - `/projects/<slug>/`
-- `/shop/`
 
 Project `aliases` generate additional static pages with a canonical URL pointing
 to the primary slug. Published content is selected by `status: published`.
+Note content may remain in the Obsidian source and committed snapshot, but the
+site does not expose note or shop routes unless the owner explicitly restores
+those sections.
 
 The collection schema already accepts `locale: ru|en` and `translationKey`.
 Russian is the default locale and keeps unprefixed URLs. Do not publish a
